@@ -4,37 +4,38 @@
 <head>
 	<title>Sign up</title>
 	<link rel="stylesheet" type="text/css" href="{% static "c.css" %}">
-	<script type="text/javascript" src="{% static 'ja.js' %}"></script>
 
 </head>
 <body>
-	<div id="test">
-	<h1>helloooo test</h1>
-	</div>
-	<h1 class="h">Sign up</h1>
-	<form  id="sign_in">
-		<label for="user">Name:</label> 
-		<input type="text" name="us" id="username" required>
-		<br>
-		<br>
-		<label for="user">Admision ID:</label> 
-		<input type="text" name="ad" id="admssion" required>
-		<br>
-		<br>
 
-		<label for="user">Email:</label> 
-		<input type="text" name="em" id="email" required>
+	<h1 class="h">Sign up</h1>
+
+	<form  id="sign_in" onsubmit="return false;">
+		<label>Name:</label> 
+		<input type="text" name="name" id="name" >
+		<br>
+		<br>
+		<label>Admission ID:</label> 
+		<input type="text" name="admission" id="admission" >
+		<br>
+		<br>
+		<label>Email:</label> 
+		<input type="text" name="email" id="email" >
 		<br>
 		<br>
 
 		<label for="pass">password:</label>
-		<input type="password" name="pass " id="pass">
+		<input type="password" >
 		<br>
-		<button type="submit">login</button>
+		<button id="signin" onclick="get_element()">login</button>
 		{% csrf_token %}
 	</form>
+	<p id="output"> test</p>
 
-	<p id="demo"></p>
+		{{ name }}
+</body>	
+	
+	<script type="text/javascript" src="{% static 'ja.js' %}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-</body>
 </html>
