@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign up</title>
+	<link rel="stylesheet" type="text/css" href="{% static "c.css" %}">
+	<script type="text/javascript" src="{% static 'ja.js' %}"></script>
+
+</head>
+<body>
+	<div id="test">
+	<h1>helloooo test</h1>
+	</div>
+	<h1 class="h">Sign up</h1>
+	<form  id="sign_in">
+		<label for="user">Name:</label> 
+		<input type="text" name="us" id="username" required>
+		<br>
+		<br>
+		<label for="user">Admision ID:</label> 
+		<input type="text" name="ad" id="admssion" required>
+		<br>
+		<br>
+
+		<label for="user">Email:</label> 
+		<input type="text" name="em" id="email" required>
+		<br>
+		<br>
+
+		<label for="pass">password:</label>
+		<input type="password" name="pass " id="pass">
+		<br>
+		<button type="submit">login</button>
+		{% csrf_token %}
+	</form>
+
+	<p id="demo"></p>
+
+</body>
+</html>
