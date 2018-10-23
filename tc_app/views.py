@@ -8,7 +8,10 @@ def index(request):
 	return render(request,'tc_app/index.html')
 
 def login(request):
-	return HttpResponse("Make user login page here")
+	return render(request, 'tc_app/login.html')
+
+def dashboard(request):
+	return render(request, 'tc_app/dashboard.html')
 
 @csrf_exempt
 def get_element(request):
