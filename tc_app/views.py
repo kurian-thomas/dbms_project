@@ -7,6 +7,9 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
 	return render(request,'tc_app/index.html')
 
+def login(request):
+	return render(request, 'tc_app/login.html')
+
 @csrf_exempt
 def get_element(request):
 	name=request.POST.get("name","")
