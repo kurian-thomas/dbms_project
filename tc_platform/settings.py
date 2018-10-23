@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tc_app',
     'dajaxice',
-    'dajax',
+    
 ]
 
 
