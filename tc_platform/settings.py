@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tc_app'
+    'tc_app',
+    'tc_admin'
 ]
 
 
