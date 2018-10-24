@@ -10,6 +10,11 @@ email
 password
 
 
+in tc_app/views.py
 
+funtion get_element_log() --------------->for user login details details 
+
+admission
+password
 
 
