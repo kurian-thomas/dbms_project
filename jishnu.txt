@@ -1,0 +1,15 @@
+variables to be added using raw pthon to sql code (type done to signify complition of task )
+
+in tc_platform/tc_app/views.py
+
+funtion get_element() --------------->for user signup details 
+
+name
+admission
+email
+password
+
+
+
+
+
