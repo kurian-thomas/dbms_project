@@ -19,6 +19,12 @@ def get_element(request):
 	admission=request.POST.get("admission","")
 	email=request.POST.get("email","")
 	password=request.POST.get("pass","")
-	print(str(email)+" "+str(name)+" "+str(admission)+" "+str(password))  #to see the form fiels results
+	# print(str(email)+" "+str(name)+" "+str(admission)+" "+str(password))  #to see the form fiels results
 	return render(request,'tc_app/index.html')	
-				
+
+@csrf_exempt				
+def get_element_log(request):
+	admission=request.POST.get("ad","")
+	password=request.POST.get("pass","")
+	# print(str(admission)+" "+str(password))  #to see the form fiels results
+	return render(request,'tc_app/login.html')					

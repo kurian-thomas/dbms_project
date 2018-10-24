@@ -5,6 +5,7 @@ from tc_app import views
 app_name = 'tc_app'
 
 urlpatterns = [
+	url(r'^get_element_log/', views.get_element_log, name='get_login'),
 	url(r'^index/', views.index, name='index'),
 	url(r'^login/', views.login, name='login'),
 	url(r'^dashboard/', views.dashboard, name='dashboard'),
