@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import sqlite3
 # Create your views here.
@@ -44,7 +44,7 @@ def get_element(request):
 def get_element_log(request):
 	admission=request.POST.get("ad","")
 	password=request.POST.get("pass","")
-   l=auth(admission,password)
-   print(l)
+	l=auth(admission,password)
+	print(l)
 	# print(str(admission)+" "+str(password))  #to see the form fiels results
-	return render(request,'tc_app/login.html')					
+	return JsonResponse({"l":l})					
