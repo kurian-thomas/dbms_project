@@ -40,12 +40,21 @@ function get_element_log(){
  			ad:n,
  			pass:p,
  		},
- 		success: function(json){
+ 		success: function(data){
+ 			var lb=document.getElementById("logbutton");
  			console.log("sucess");
- 			console.log(json.message);
- 			$('#output').html(json.message);
+ 			console.log(data.l);
+
+ 			if(data.l){
+ 					lb.setAttribute('href',"http://127.0.0.1:8000/tc/dashboard/");
+ 					window.location.href=lb.getAttribute("href");
+ 			}
+ 			else{
+ 				alert("password or username is incorrect");
+ 			}
  			$('.ajaxProgress').hide();
  		}
  	});
+ 			
  } 
 
