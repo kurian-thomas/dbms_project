@@ -30,5 +30,5 @@ c.execute("DROP TABLE use")
 
 conn.commit()
 
-
+# updated
 conn.close()
