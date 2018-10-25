@@ -9,8 +9,11 @@ def index(request):
 
 
 def insert_sql(id,name,email,password,types):
-    with conn:
-        c.execute("INSERT INTO USER VALUES(:id,:email,:name,:passd,:type)",{'id':id,'email':email,'name':name,'passd':password,'type':types})
+    conn=sqlite3.connect('dbms_project\SQL\Main.db')
+    c=conn.cursor()
+    c.execute("INSERT INTO USER VALUES(:id,:email,:name,:passd,:type)",{'id':id,'email':email,'name':name,'passd':password,'type':types})
+    conn.commit()
+    conn.close()    
 
 @csrf_exempt
 def get_element(request):
