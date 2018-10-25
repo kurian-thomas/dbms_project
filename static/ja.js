@@ -1,5 +1,4 @@
 var x = document.getElementById("sign_in").elements;
-var y=document.getElementById("log_in").elements;
 
  function get_element_signup(){
  	console.log("in get");
@@ -25,25 +24,28 @@ var y=document.getElementById("log_in").elements;
  	});
  } 
 
-function get_element_login(){
+function get_element_log(){
  	console.log("in login");
- 	// $('.ajaxProgress').show();
- 	// $.ajax({
- 	// 	type:"POST",
- 	// 	url:"http://127.0.0.1:8000/tc/get_element/",
- 	// 	datatype:"json",
- 	// 	async:true,
- 	// 	data:{
- 	// 		csrfmiddlewaretoken:'{{ csrf_token }}',
- 	// 		name:y[0].value,
- 	// 		pass:y[1].value,
- 	// 	},
- 	// 	success: function(json){
- 	// 		console.log("sucess");
- 	// 		console.log(json.message);
- 	// 		$('#output').html(json.message);
- 	// 		$('.ajaxProgress').hide();
- 	// 	}
- 	// });
+ 	var n=$("#ad").val();
+ 	var p=$("#pass").val();
+
+ 	$('.ajaxProgress').show();
+ 	$.ajax({
+ 		type:"POST",
+ 		url:"http://127.0.0.1:8000/tc/get_element_log/",
+ 		datatype:"json",
+ 		async:true,
+ 		data:{
+ 			csrfmiddlewaretoken:'{{ csrf_token }}',
+ 			ad:n,
+ 			pass:p,
+ 		},
+ 		success: function(json){
+ 			console.log("sucess");
+ 			console.log(json.message);
+ 			$('#output').html(json.message);
+ 			$('.ajaxProgress').hide();
+ 		}
+ 	});
  } 
 
