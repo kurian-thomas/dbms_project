@@ -114,4 +114,4 @@ migrations
 
 #Confidential data 
 database.cnf
-SQL/Main.db
+Main.db
