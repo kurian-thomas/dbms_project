@@ -1,2 +1,7 @@
 instructions front end and back end 
 
+------------------------------------------
+def get_element_log(request)
+    'l' returns an integer value if it is there then it will be non zero
+    and if not it will be zero
+    auth () function is used to check whether that particular record is present or not.

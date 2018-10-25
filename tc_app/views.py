@@ -12,15 +12,23 @@ def login(request):
 
 def dashboard(request):
 	return render(request,'tc_app/dashboard.html')
-	
+
 def insert_sql(id,name,email,password,types):
-    conn=sqlite3.connect('dbms_project\SQL\Main.db')
+    conn=sqlite3.connect('SQL/Main.db')
     c=conn.cursor()
     c.execute("INSERT INTO USER VALUES(:id,:email,:name,:passd,:type)",{'id':id,'email':email,'name':name,'passd':password,'type':types})
     c.execute("SELECT * FROM USER ")
     print(c.fetchall())
     conn.commit()
     conn.close()    
+
+def auth(id,passd):
+    conn=sqlite3.connect('SQL/Main.db')
+    c=conn.cursor()
+    c.execute("SELECT * FROM USER WHERE USER.id=:id AND USER.password=:passd",{'id':id,'passd':passd})
+    l=len(c.fetchall())
+    conn.close()
+    return l
 
 @csrf_exempt
 def get_element(request):
@@ -36,5 +44,7 @@ def get_element(request):
 def get_element_log(request):
 	admission=request.POST.get("ad","")
 	password=request.POST.get("pass","")
+   l=auth(admission,password)
+   print(l)
 	# print(str(admission)+" "+str(password))  #to see the form fiels results
 	return render(request,'tc_app/login.html')					
