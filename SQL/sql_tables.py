@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 
 """ 
 - Existing Tables: USER,ANS,QUES,TEST,USER_RESPONSE;
 - PRAGMA used to update values of env variables. Here used to enable foreign key
   operations
+- Only need to run once.
 
 """
 
@@ -57,7 +57,6 @@ c.execute('''CREATE TABLE USER_RESPONSE
            FOREIGN KEY(test_id) REFERENCES TEST(id),
            FOREIGN KEY(question_id) REFERENCES QUES(id),
            FOREIGN KEY(answer_id) REFERENCES ANS(id))''') 
-
 
 conn.commit()
 
