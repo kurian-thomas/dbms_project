@@ -12,9 +12,9 @@ def login(request):
 
 def dashboard(request):
 	return render(request,'tc_app/dashboard.html')
-	
+
 def insert_sql(id,name,email,password,types):
-    conn=sqlite3.connect('dbms_project\SQL\Main.db')
+    conn=sqlite3.connect('SQL/Main.db')
     c=conn.cursor()
     c.execute("INSERT INTO USER VALUES(:id,:email,:name,:passd,:type)",{'id':id,'email':email,'name':name,'passd':password,'type':types})
     c.execute("SELECT * FROM USER ")
