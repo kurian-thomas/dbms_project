@@ -18,7 +18,6 @@ def insert_sql(id,name,email,password,types):
     c=conn.cursor()
     c.execute("INSERT INTO USER VALUES(:id,:email,:name,:passd,:type)",{'id':id,'email':email,'name':name,'passd':password,'type':types})
     c.execute("SELECT * FROM USER ")
-    print(c.fetchall())
     conn.commit()
     conn.close()    
 
@@ -28,6 +27,7 @@ def auth(id,passd):
     c.execute("SELECT username FROM USER WHERE USER.id=:id AND USER.password=:passd",{'id':id,'passd':passd})
     l=c.fetchall();
     conn.close()
+    print(l)
     if l:
         return [len(l),l]
     else:

@@ -47,13 +47,19 @@ function get_element_log(){
  		},
  		success: function(data){
  			var lb=document.getElementById("logbutton");
- 			var welcome=document.getElementById("username");
  			console.log("sucess");
- 			console.log(data.l);
- 			if(data.l){
+ 			console.log(data.l[0]);
+ 			//console.log(data.l[1][0][0]);
+ 			if(data.l[0]){
+ 					var n=data.l[1][0][0];
+
  					lb.setAttribute('href',"http://127.0.0.1:8000/tc/dashboard/");
- 					//welcome.innerHTML="Welcome "+n;
  					window.location.href=lb.getAttribute("href");
+ 					window.onload=function(){
+ 						//function welcome(n);
+ 						$("#intro").html("welcome "+n);
+ 					}
+ 					//console.log(data.l[1][0])
  					
  			}
  			else{
@@ -64,6 +70,7 @@ function get_element_log(){
  	});
  			
  } 
+
 
 function get_element_adminlog(){
  	console.log("in ad_login");
@@ -82,17 +89,17 @@ function get_element_adminlog(){
  			pass:p,
  		},
  		success: function(data){
- 			//var lb=document.getElementById("logbutton");
+ 			var alb=document.getElementById("adlogbutton");
  			console.log("sucess");
- 			// console.log(data.l);
+ 			console.log(data.l);
 
- 			// if(data.l){
- 			// 		lb.setAttribute('href',"http://127.0.0.1:8000/tc/dashboard/");
- 			// 		window.location.href=lb.getAttribute("href");
- 			// }
- 			// else{
- 			// 	alert("password or username is incorrect");
- 			// }
+ 			if(data.l){
+ 			 		alb.setAttribute('href',"http://127.0.0.1:8000/tcadmin/dashboard/");
+ 					window.location.href=alb.getAttribute("href");
+ 			 }
+ 			 else{
+ 			 	alert("password or username is incorrect");
+ 			 }
  			$('.ajaxProgress').hide();
  		}
  	});
