@@ -61,10 +61,11 @@ c.execute('''CREATE TABLE USER_RESPONSE
 conn.commit()
 
 c.execute('''CREATE TABLE ADMIN
-          (id INTEGER PRIMARY KEY AUTOINCREMENT,
-           name text NOT NULL,
-           password text NOT NULL)''') 
+          ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+          password text DEFAULT "password",
+           Name text DEFAULT "admin")''')
 
 conn.commit() 
+
 
 conn.close()

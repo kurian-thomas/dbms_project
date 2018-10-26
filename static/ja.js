@@ -42,12 +42,14 @@ function get_element_log(){
  		},
  		success: function(data){
  			var lb=document.getElementById("logbutton");
+ 			var welcome=document.getElementById("username");
  			console.log("sucess");
  			console.log(data.l);
-
  			if(data.l){
  					lb.setAttribute('href',"http://127.0.0.1:8000/tc/dashboard/");
+ 					//welcome.innerHTML="Welcome "+n;
  					window.location.href=lb.getAttribute("href");
+ 					
  			}
  			else{
  				alert("password or username is incorrect");

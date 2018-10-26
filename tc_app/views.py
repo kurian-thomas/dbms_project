@@ -25,15 +25,10 @@ def insert_sql(id,name,email,password,types):
 def auth(id,passd):
     conn=sqlite3.connect('SQL/Main.db')
     c=conn.cursor()
-    c.execute("SELECT username FROM USER WHERE USER.id=:id AND USER.password=:passd",{'id':id,'passd':passd})
-    l=c.fetchall();
+    c.execute("SELECT * FROM USER WHERE USER.id=:id AND USER.password=:passd",{'id':id,'passd':passd})
+    l=len(c.fetchall())
     conn.close()
-    if l:
-        return [len(l),l]
-    else:
-        return [len(l),"None"]
-    
-    
+    return l
 
 @csrf_exempt
 def get_element(request):
