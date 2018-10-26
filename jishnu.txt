@@ -18,3 +18,15 @@ admission
 password
 
 
+in tc_admin/views.py
+	funtion login() --------------->for admin login details details
+	variables:
+			admin_name
+			admin_pass
+	objective :
+		let a seperate table have a predefined admin name nad password 
+		check if the variables are correspoding to that 
+		return a binary variable 		 
+
+
+

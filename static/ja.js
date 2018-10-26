@@ -58,3 +58,40 @@ function get_element_log(){
  			
  } 
 
+function get_element_adminlog(){
+ 	console.log("in ad_login");
+ 	var n=$("#admin_name").val();
+ 	var p=$("#admin_pass").val();
+ 	//console.log(n+" "+p);
+ 	$('.ajaxProgress').show();
+ 	$.ajax({
+ 		type:"POST",
+ 		url:"http://127.0.0.1:8000/tcadmin/get_element_adminlog/",
+ 		datatype:"json",
+ 		async:true,
+ 		data:{
+ 			csrfmiddlewaretoken:'{{ csrf_token }}',
+ 			name:n,
+ 			pass:p,
+ 		},
+ 		success: function(data){
+ 			//var lb=document.getElementById("logbutton");
+ 			console.log("sucess");
+ 			// console.log(data.l);
+
+ 			// if(data.l){
+ 			// 		lb.setAttribute('href',"http://127.0.0.1:8000/tc/dashboard/");
+ 			// 		window.location.href=lb.getAttribute("href");
+ 			// }
+ 			// else{
+ 			// 	alert("password or username is incorrect");
+ 			// }
+ 			$('.ajaxProgress').hide();
+ 		}
+ 	});
+ 			
+ } 
+
+ 
+
+
