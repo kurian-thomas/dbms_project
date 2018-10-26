@@ -2,6 +2,10 @@ var x = document.getElementById("sign_in").elements;
 
  function get_element_signup(){
  	console.log("in get");
+ 	var n=x[0].value;
+ 	var p=x[1].value;
+ 	var ad=x[2].value;
+ 	var em=x[3].value;
  	$('.ajaxProgress').show();
  	$.ajax({
  		type:"POST",
@@ -10,15 +14,16 @@ var x = document.getElementById("sign_in").elements;
  		async:true,
  		data:{
  			csrfmiddlewaretoken:'{{ csrf_token }}',
- 			name:x[0].value,
- 			admission:x[1].value,
- 			email:x[2].value,
- 			pass:x[3].value,
+ 			name:n,
+ 			admission:ad,
+ 			email:em,
+ 			pass:p,
  		},
  		success: function(json){
  			console.log("sucess");
- 			console.log(json.message);
- 			$('#output').html(json.message);
+ 			var sb=document.getElementById("sigbutton");
+ 			sb.setAttribute('href',"http://127.0.0.1:8000/tc/login/");
+ 			window.location.href=sb.getAttribute("href");
  			$('.ajaxProgress').hide();
  		}
  	});

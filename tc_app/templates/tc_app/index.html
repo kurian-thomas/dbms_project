@@ -10,13 +10,14 @@
 	<div class="container">
     <div class="col-md-6">
     <div id="logbox">
-      <form id="signup" method="post" action="/signup">
+      <form id="sign_in" method="post" action="/signup">
         <h1>create an account</h1>
-        <input name="user[name]" type="text" placeholder="What's your username?" pattern="^[\w]{3,16}$" autofocus="autofocus" required="required" class="input pass"/>
-        <input name="user[password]" type="password" placeholder="Choose a password" required="required" class="input pass"/>
-        <input name="user[password2]" type="password" placeholder="Confirm password" required="required" class="input pass"/>
-        <input name="user[email]" type="email" placeholder="Email address" class="input pass"/>
-        <input type="submit" value="Sign me up!" class="inputButton"/>
+        <input name="name" type="text" placeholder="What's your username?" autofocus="autofocus" required="required" class="input pass" id="sname" />
+        <input name="password" type="password" placeholder="Enter a password" required="required" class="input pass
+         " id="spass" />
+        <input name="admission no" type="name" placeholder="Admission no" required="required" class="input pass" id="sad" />
+        <input name="email" type="email" placeholder="Email address" class="input pass" required="required" id="semail" />
+        <a class="btn btn-lg btn-success btn-block" id="sigbutton" onclick="get_element_signup()">Sign me up! </a>
         <div class="text-center">
             already have an account? <a href="#" id="login_id">login</a>
         </div>
@@ -25,7 +26,6 @@
 	</div>
 </div>
 </body>
-
 	<script type="text/javascript" src="{% static 'ja.js' %}"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
