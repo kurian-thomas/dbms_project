@@ -59,7 +59,10 @@ c.execute('''CREATE TABLE USER_RESPONSE
 
 conn.commit()
 
-c.execute("DROP TABLE ADMIN")
+try:
+  c.execute("DROP TABLE ADMIN")
+except:
+  pass
 
 conn.commit()
 
