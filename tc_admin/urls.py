@@ -5,7 +5,7 @@ from tc_admin import views
 app_name = 'tc_admin'
 
 urlpatterns = [
-	url(r'^get_element_adminlog/', views.login, name='admin_login'),
+	url(r'^get_element_adminlog/', views.adlogin, name='admin_login'),
 	url(r'^dashboard/', views.dashboard, name='dashboard'),
 	url(r'^login/', views.login, name='login'),
 ]

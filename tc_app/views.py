@@ -18,17 +18,22 @@ def insert_sql(id,name,email,password,types):
     c=conn.cursor()
     c.execute("INSERT INTO USER VALUES(:id,:email,:name,:passd,:type)",{'id':id,'email':email,'name':name,'passd':password,'type':types})
     c.execute("SELECT * FROM USER ")
-    print(c.fetchall())
     conn.commit()
     conn.close()    
 
 def auth(id,passd):
     conn=sqlite3.connect('SQL/Main.db')
     c=conn.cursor()
-    c.execute("SELECT * FROM USER WHERE USER.id=:id AND USER.password=:passd",{'id':id,'passd':passd})
-    l=len(c.fetchall())
+    c.execute("SELECT username FROM USER WHERE USER.id=:id AND USER.password=:passd",{'id':id,'passd':passd})
+    l=c.fetchall();
     conn.close()
-    return l
+    print(l)
+    if l:
+        return [len(l),l]
+    else:
+        return [len(l),"None"]
+    
+    
 
 @csrf_exempt
 def get_element(request):

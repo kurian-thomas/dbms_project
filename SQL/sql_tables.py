@@ -12,7 +12,6 @@ import sqlite3
 conn=sqlite3.connect('Main.db')
 
 c=conn.cursor()
-
 c.execute("PRAGMA foreign_keys = 1")
 
 c.execute('''CREATE TABLE USER
@@ -60,12 +59,15 @@ c.execute('''CREATE TABLE USER_RESPONSE
 
 conn.commit()
 
+c.execute("DROP TABLE ADMIN")
+
+conn.commit()
+
 c.execute('''CREATE TABLE ADMIN
-          ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-          password text DEFAULT "password",
-           Name text DEFAULT "admin")''')
+          (id INTEGER PRIMARY KEY AUTOINCREMENT,
+           name text NOT NULL,
+           password text NOT NULL)''') 
 
 conn.commit() 
-
 
 conn.close()
