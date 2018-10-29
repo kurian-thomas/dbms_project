@@ -1,4 +1,4 @@
-# DalalBull
+# GrowthTrack
 
 ## STEPS
 
