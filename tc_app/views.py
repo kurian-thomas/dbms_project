@@ -19,7 +19,12 @@ def dashboard(request):
 
 	conn = sqlite3.connect('SQL/Main.db')
 	c = conn.cursor()
-	user_name = c.execute("SELECT username FROM USER WHERE USER.id=:id",{'id':user_admission}).fetchall()[0][0]
+
+	try:
+		user_name = c.execute("SELECT username FROM USER WHERE USER.id=:id",{'id':user_admission}).fetchall()[0][0]
+	except:
+		user_name=''
+		print("User not registered")
 	conn.close()
 
 	return render(request,'tc_app/dashboard.html',{'user_name': user_name})
