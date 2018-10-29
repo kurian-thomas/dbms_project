@@ -53,7 +53,6 @@ def auth(id,passd):
     else:
         return [len(l),"None"]
     
-    
 
 @csrf_exempt
 def get_element(request):
