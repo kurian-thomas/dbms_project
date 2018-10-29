@@ -1,4 +1,4 @@
-# DalalBull
+# DBMS Project
 
 ## STEPS
 
