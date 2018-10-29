@@ -12,15 +12,15 @@ def login(request):
 
 def dashboard(request):
 
+	try:
+		user_admission = request.session['user']
+	except:
+		user_admission=''
+
 	conn = sqlite3.connect('SQL/Main.db')
 	c = conn.cursor()
-
-	try:
-		user_email = request.session['user']
-	except:
-		user_email=''
-
-	user_name = c.execute("SELECT username FROM USER WHERE USER.email=:email",{'email':user_email}).fetchall()[0][0]
+	user_name = c.execute("SELECT username FROM USER WHERE USER.id=:id",{'id':user_admission}).fetchall()[0][0]
+	conn.close()
 
 	return render(request,'tc_app/dashboard.html',{'user_name': user_name})
 
@@ -55,7 +55,7 @@ def get_element(request):
 	insert_sql(admission,name,email,password,'U')
 	print(str(email)+" "+str(name)+" "+str(admission)+" "+str(password))
 
-	request.session['user'] = email
+	request.session['user'] = admission
 
 	return render(request,'tc_app/index.html')
 
@@ -64,9 +64,11 @@ def get_element_log(request):
 	admission = request.POST.get("ad","")
 	password = request.POST.get("pass","")
 
-	request.session['user'] = email
-
-	l = auth(admission,password)
+	request.session['user'] = admission
+	l=auth(admission,password)
 	print(l)
 	# print(str(admission)+" "+str(password))  #to see the form fiels results
 	return JsonResponse({"l":l})					
+
+def test(request):
+	render(request,'tc_app/test.html')

@@ -9,7 +9,7 @@ var x = document.getElementById("sign_in").elements;
  	$('.ajaxProgress').show();
  	$.ajax({
  		type:"POST",
- 		url:"http://127.0.0.1:8000/tc/get_element/",
+ 		url:"/tc/get_element/",
  		datatype:"json",
  		async:true,
  		data:{
@@ -22,7 +22,7 @@ var x = document.getElementById("sign_in").elements;
  		success: function(json){
  			console.log("sucess");
  			var sb=document.getElementById("sigbutton");
- 			sb.setAttribute('href',"http://127.0.0.1:8000/tc/login/");
+ 			sb.setAttribute('href',"/tc/login/");
  			window.location.href=sb.getAttribute("href");
  			$('.ajaxProgress').hide();
  		}
@@ -37,7 +37,7 @@ function get_element_log(){
  	$('.ajaxProgress').show();
  	$.ajax({
  		type:"POST",
- 		url:"http://127.0.0.1:8000/tc/get_element_log/",
+ 		url:"/tc/get_element_log/",
  		datatype:"json",
  		async:true,
  		data:{
@@ -53,7 +53,7 @@ function get_element_log(){
  			if(data.l[0]){
  					var n=data.l[1][0][0];
 
- 					lb.setAttribute('href',"http://127.0.0.1:8000/tc/dashboard/");
+ 					lb.setAttribute('href',"/tc/dashboard/");
  					window.location.href=lb.getAttribute("href");
  					window.onload=function(){
  						//function welcome(n);
@@ -80,7 +80,7 @@ function get_element_adminlog(){
  	$('.ajaxProgress').show();
  	$.ajax({
  		type:"POST",
- 		url:"http://127.0.0.1:8000/tcadmin/get_element_adminlog/",
+ 		url:"/get_element_adminlog/",
  		datatype:"json",
  		async:true,
  		data:{
@@ -94,7 +94,7 @@ function get_element_adminlog(){
  			console.log(data.l);
 
  			if(data.l){
- 			 		alb.setAttribute('href',"http://127.0.0.1:8000/tcadmin/dashboard/");
+ 			 		alb.setAttribute('href',"/tcadmin/dashboard/");
  					window.location.href=alb.getAttribute("href");
  			 }
  			 else{
