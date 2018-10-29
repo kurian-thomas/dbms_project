@@ -22,6 +22,9 @@ def insert_sql(id,name,email,password,types):
     conn.commit()
     conn.close()    
 
+def question(request):
+	return render(request, "tc_app/question.html")
+
 @csrf_exempt
 def get_element(request):
 	name=request.POST.get("name","")
