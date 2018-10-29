@@ -37,6 +37,10 @@ def insert_sql(id,name,email,password,types):
     conn.commit()
     conn.close()    
 
+
+def question(request):
+	return render(request, "tc_app/question.html")
+
 def auth(id,passd):
     conn = sqlite3.connect('SQL/Main.db')
     c = conn.cursor()
@@ -49,7 +53,7 @@ def auth(id,passd):
     else:
         return [len(l),"None"]
     
-    
+
 
 @csrf_exempt
 def get_element(request):
