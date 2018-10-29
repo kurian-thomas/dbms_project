@@ -4,37 +4,29 @@
 <head>
 	<title>Sign up</title>
 	<link rel="stylesheet" type="text/css" href="{% static "c.css" %}">
-
+	<link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap.css" %}">
 </head>
 <body>
+	<div class="container">
+    <div class="col-md-6">
+    <div id="logbox">
+      <form id="sign_in" method="post" action="/signup">
+        <h1>create an account</h1>
+        <input name="name" type="text" placeholder="What's your username?" autofocus="autofocus" required="required" class="input pass" id="sname" />
+        <input name="password" type="password" placeholder="Enter a password" required="required" class="input pass
+         " id="spass" />
+        <input name="admission no" type="name" placeholder="Admission no" required="required" class="input pass" id="sad" />
+        <input name="email" type="email" placeholder="Email address" class="input pass" required="required" id="semail" />
+        <a class="btn btn-lg btn-success btn-block" id="sigbutton" onclick="get_element_signup()">Sign me up! </a>
+        <div class="text-center">
+            already have an account? <a href="#" id="login_id">login</a>
+        </div>
+      </form>
+    </div>
+	</div>
+</div>
+</body>
 
-	<h1 class="h">Sign up</h1>
-
-	<form  id="sign_in" onsubmit="return false;">
-		<label>Name:</label> 
-		<input type="text" name="name" id="name" >
-		<br>
-		<br>
-		<label>Admission ID:</label> 
-		<input type="text" name="admission" id="admission" >
-		<br>
-		<br>
-		<label>Email:</label> 
-		<input type="text" name="email" id="email" >
-		<br>
-		<br>
-
-		<label for="pass">password:</label>
-		<input type="password" >
-		<br>
-		<button id="signin" onclick="get_element_signup()">login</button>
-		{% csrf_token %}
-	</form>
-	<p id="output"> test</p>
-
-
-</body>	
-	
 	<script type="text/javascript" src="{% static 'ja.js' %}"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
