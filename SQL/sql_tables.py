@@ -12,7 +12,6 @@ import sqlite3
 conn=sqlite3.connect('Main.db')
 
 c=conn.cursor()
-
 c.execute("PRAGMA foreign_keys = 1")
 
 c.execute('''CREATE TABLE USER
@@ -59,5 +58,19 @@ c.execute('''CREATE TABLE USER_RESPONSE
            FOREIGN KEY(answer_id) REFERENCES ANS(id))''') 
 
 conn.commit()
+
+try:
+  c.execute("DROP TABLE ADMIN")
+except:
+  pass
+
+conn.commit()
+
+c.execute('''CREATE TABLE ADMIN
+          (id INTEGER PRIMARY KEY AUTOINCREMENT,
+           name text NOT NULL,
+           password text NOT NULL)''') 
+
+conn.commit() 
 
 conn.close()

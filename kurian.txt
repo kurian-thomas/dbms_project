@@ -1,2 +1,9 @@
 instructions front end and back end 
 
+
+----------------------------------------------
+Admin login:
+    use the values "l" same for the user.
+    
+    
+    
