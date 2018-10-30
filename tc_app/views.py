@@ -19,7 +19,12 @@ def dashboard(request):
 
 	conn = sqlite3.connect('SQL/Main.db')
 	c = conn.cursor()
-	user_name = c.execute("SELECT username FROM USER WHERE USER.id=:id",{'id':user_admission}).fetchall()[0][0]
+
+	try:
+		user_name = c.execute("SELECT username FROM USER WHERE USER.id=:id",{'id':user_admission}).fetchall()[0][0]
+	except:
+		user_name=''
+		print("User not registered")
 	conn.close()
 
 	return render(request,'tc_app/dashboard.html',{'user_name': user_name})
@@ -31,6 +36,10 @@ def insert_sql(id,name,email,password,types):
     c.execute("SELECT * FROM USER ")
     conn.commit()
     conn.close()    
+
+
+def question(request):
+	return render(request, "tc_app/question.html")
 
 def auth(id,passd):
     conn = sqlite3.connect('SQL/Main.db')
@@ -44,7 +53,7 @@ def auth(id,passd):
     else:
         return [len(l),"None"]
     
-    
+
 
 @csrf_exempt
 def get_element(request):
