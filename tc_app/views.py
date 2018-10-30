@@ -54,7 +54,6 @@ def auth(id,passd):
         return [len(l),"None"]
     
 
-
 @csrf_exempt
 def get_element(request):
 	name = request.POST.get("name","")
