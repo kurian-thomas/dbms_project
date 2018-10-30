@@ -27,4 +27,5 @@ def adlogin(request):
     admin_pass=request.POST.get("pass","")
     print(str(admin_name)+" "+str(admin_pass))  #to see the form fiels results
     l=auth(admin_name,admin_pass)
+    print(l);
     return JsonResponse({"l":l})
