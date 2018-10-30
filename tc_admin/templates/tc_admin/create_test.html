@@ -5,10 +5,33 @@
 <!-- Navigation -->
 {% include 'tc_admin/navbar.html' %}
 
+<script type="text/javascript">
+$( document ).ready(function() {
+
+    $('#cloneQuestion').click(function(){
+
+      // get the last DIV which ID starts with ^= "klon"
+      var $div = $('div[id^="question"]:last');
+
+      // Read the Number from that DIV's ID (i.e: 3 from "klon3")
+      // And increment that number by 1
+      var num = parseInt( $div.prop("id").match(/\d+/g), 10 ) +1;
+
+      // Clone it and assign the new ID (i.e: from num 4 to ID "klon4")
+      var $klon = $div.clone().prop('id', 'question'+num );
+
+      // Finally insert $klon wherever you want
+      $div.after( $klon );
+      $("#question"+(num)+" #num_title").text(num);
+
+    });
+});
+</script>
+
 <!-- Page Content -->
 <div id="page-wrapper" style="min-height: 903px;">
     <div class="container-fluid">
-        <form role="form" action="#" method="POST">
+        <form action="/tcadmin/create_test_form/" method="POST">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Create Test
@@ -25,7 +48,6 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        
                                             <div class="form-group">
                                                 <label>Test Title</label>
                                                 <input class="form-control">
@@ -61,13 +83,16 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Add Questions
+                                <div class="pull-right">
+                                    <button id="cloneQuestion" type="button">Add Question</button>
+                                </div>
                             </div>
                             <div class="panel-body">
-                                <div class="row">
+                                <div id="question1" class="row" style="margin-top: 20px;">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label>Question #1</label>
-                                            <textarea class="form-control" rows="3"></textarea>
+                                            <label>Question #<span id="num_title">1</span></label>
+                                            <textarea name="question" class="form-control" rows="3"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label>Options</label>
@@ -108,7 +133,6 @@
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
-                                <!-- /.row (nested) -->
                             </div>
                             <!-- /.panel-body -->
                         </div>
