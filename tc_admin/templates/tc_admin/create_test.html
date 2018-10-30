@@ -8,21 +8,118 @@
 <!-- Page Content -->
 <div id="page-wrapper" style="min-height: 903px;">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Create Test</h1>
-                        <!--The Question panel-->
-
-                
-            </div>
+        <form role="form" action="#" method="POST">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Create Test
+                        <input type="submit" class="btn btn-success pull-right">
+                    </h1>
                 </div>
-                <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+            <div class="row">
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Create a new Test
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        
+                                            <div class="form-group">
+                                                <label>Test Title</label>
+                                                <input class="form-control">
+                                                <p class="help-block">Example: Data Structures</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea class="form-control" rows="3"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Test Date</label>
+                                                <input class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Duration</label>
+                                                <input type="number" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tags</label>
+                                                <input class="form-control">
+                                            </div>
+                                    </div>
+                                    <!-- /.col-lg-6 (nested) -->
+                                </div>
+                                <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Add Questions
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Question #1</label>
+                                            <textarea class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Options</label>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-lg-offset-1">
+                                                    A: <input name="">
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    B: <input name="">
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top: 20px;">
+                                                <div class="col-lg-4 col-lg-offset-1">
+                                                    C: <input name="">
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    D: <input name="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Correct Answer</label>
+                                            <div class="form-group row">
+                                                <label class="checkbox-inline col-lg-2 col-lg-offset-1">
+                                                    <input type="checkbox">A
+                                                </label>
+                                                <label class="checkbox-inline col-lg-2">
+                                                    <input type="checkbox">B
+                                                </label>
+                                                <label class="checkbox-inline col-lg-2">
+                                                    <input type="checkbox">C
+                                                </label>
+                                                <label class="checkbox-inline col-lg-2">
+                                                    <input type="checkbox">D
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.col-lg-6 (nested) -->
+                                </div>
+                                <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+            </div>
+        </form>
     </div>
 </div>
+
 {% endblock %}
 
 
