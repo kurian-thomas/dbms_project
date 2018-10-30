@@ -32,3 +32,8 @@ def adlogin(request):
 
 def createtest(request):
     return render(request,'tc_admin/create_test.html')
+
+@csrf_exempt
+def create_test_form(request):
+    print(request.POST)
+    return HttpResponse("hi")
