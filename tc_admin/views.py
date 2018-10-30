@@ -29,3 +29,6 @@ def adlogin(request):
     l=auth(admin_name,admin_pass)
     print(l);
     return JsonResponse({"l":l})
+
+def createtest(request):
+    return render(request,'tc_admin/create_test.html')
