@@ -80,7 +80,7 @@ function get_element_adminlog(){
  	$('.ajaxProgress').show();
  	$.ajax({
  		type:"POST",
- 		url:"/get_element_adminlog/",
+ 		url:"/tcadmin/get_element_adminlog/",
  		datatype:"json",
  		async:true,
  		data:{
