@@ -6,4 +6,10 @@ Admin login:
     use the values "l" same for the user.
     
     
+Admin values to be inserted
+    1) Run the update_table.py
+    2) Remove the commments after doing so
+    3) Thereafter run the tc_admin.py
+    4) At the end of the input function data present in the db is printed
     
+        

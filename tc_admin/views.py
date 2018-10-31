@@ -12,6 +12,19 @@ def dashboard(request):
 def login(request):
     return render(request,'tc_admin/login.html')    
 
+def insert_test(question,a,b,c,d,val):
+    conn=sqlite3.connect('SQL/Main.db')
+    c=conn.cursor()
+    for i in range(len(question)):
+        p=[]
+        p.extend([a[i],b[i],c[i],d[i]])
+        c.execute("INSERT INTO QUES(Ques,Ans_option,Ans_correct) VALUES(:q,:o,:val)",{'q':question[i],'o':str(p),'val':val[i]})
+        conn.commit()
+    c.execute("SELECT * FROM QUES")
+    print(c.fetchall())
+    conn.close()              
+        
+
 @csrf_exempt
 def auth(name,passd):
     conn=sqlite3.connect('SQL/Main.db')
@@ -41,6 +54,7 @@ def create_test_form(request):
     c=request.POST.getlist('C')
     d=request.POST.getlist('D')
     val=request.POST.getlist('check')
+    insert_test(question,a,b,c,d,val) # insert function
     print(question)
     print(a)
     print(b)

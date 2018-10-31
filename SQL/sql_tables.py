@@ -71,6 +71,7 @@ c.execute('''CREATE TABLE ADMIN
            name text NOT NULL,
            password text NOT NULL)''') 
 
+
 conn.commit() 
 
 conn.close()
