@@ -79,4 +79,4 @@ def get_element_log(request):
 	return JsonResponse({"l":l})					
 
 def test(request):
-	render(request,'tc_app/test.html')
+	return render(request,'tc_app/question.html')

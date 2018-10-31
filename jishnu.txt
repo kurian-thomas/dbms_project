@@ -30,3 +30,14 @@ in tc_admin/views.py
 
 
 
+in tc_admin/views.py
+
+funtion create_test_form() --------------------->to add the questions options and its correct value 
+
+variables:
+	 question=request.POST.getlist('question')
+    a                 ---->option name 
+    b
+    c
+    d
+    val  ------------->value of each check box

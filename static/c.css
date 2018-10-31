@@ -1,15 +1,3 @@
-.h{
-	color: red;
-}
-
-::selection {
-  background-color: #b5e2e7;
-}
-
-::-moz-selection {
-  background-color: #8ac7d8;
-}
-
 body {
   background: #3CC;
 }
@@ -39,6 +27,9 @@ h1 {
 
 h1, input {
   font-family: "Open Sans", Helvetica, sans-serif;
+}
+.side-nav{
+  height:100vh;
 }
 
 .input {
