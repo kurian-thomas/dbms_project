@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse,JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import sqlite3
+
+from .decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -10,6 +12,7 @@ def index(request):
 def login(request):
 	return render(request,'tc_app/login.html')
 
+@login_required
 def dashboard(request):
 
 	try:
@@ -29,6 +32,7 @@ def dashboard(request):
 
 	return render(request,'tc_app/dashboard.html',{'user_name': user_name})
 
+@login_required
 def insert_sql(id,name,email,password,types):
     conn = sqlite3.connect('SQL/Main.db')
     c = conn.cursor()
@@ -37,10 +41,11 @@ def insert_sql(id,name,email,password,types):
     conn.commit()
     conn.close()    
 
-
+@login_required
 def question(request):
 	return render(request, "tc_app/question.html")
 
+@login_required
 def auth(id,passd):
     conn = sqlite3.connect('SQL/Main.db')
     c = conn.cursor()
@@ -55,6 +60,7 @@ def auth(id,passd):
     
 
 @csrf_exempt
+@login_required
 def get_element(request):
 	name = request.POST.get("name","")
 	admission = request.POST.get("admission","")
@@ -67,7 +73,8 @@ def get_element(request):
 
 	return render(request,'tc_app/index.html')
 
-@csrf_exempt				
+@csrf_exempt
+@login_required				
 def get_element_log(request):
 	admission = request.POST.get("ad","")
 	password = request.POST.get("pass","")
@@ -78,5 +85,14 @@ def get_element_log(request):
 	# print(str(admission)+" "+str(password))  #to see the form fiels results
 	return JsonResponse({"l":l})					
 
+@login_required
 def test(request):
 	return render(request,'tc_app/question.html')
+
+@login_required
+def logout(request):
+    try:
+        del request.session['user']
+        return HttpResponseRedirect("/tc/login/")
+    except:
+        return HttpResponseRedirect("/tc/login/")
