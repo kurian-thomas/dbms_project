@@ -1,4 +1,6 @@
-# DBMS Project
+
+# GrowthTrack
+
 
 ## STEPS
 
