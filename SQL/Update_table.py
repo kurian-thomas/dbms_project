@@ -11,7 +11,7 @@ conn=sqlite3.connect('Main.db')
 
 c=conn.cursor()
 
-"""
+
 c.execute("ALTER TABLE QUES RENAME TO quet")
 
 c.execute("CREATE TABLE QUES (id INTEGER PRIMARY KEY,Ques text NOT NULL,Pos_marks INTEGER,Neg_marks INTEGER)")
@@ -28,7 +28,7 @@ c.execute('''CREATE TABLE USER
 
 c.execute("DROP TABLE use")
 
-"""
+
 c.execute("DROP TABLE QUES")
 
 c.execute('''CREATE TABLE QUES
