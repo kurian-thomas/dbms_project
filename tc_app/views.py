@@ -32,20 +32,18 @@ def dashboard(request):
 
 	return render(request,'tc_app/dashboard.html',{'user_name': user_name})
 
-@login_required
 def insert_sql(id,name,email,password,types):
     conn = sqlite3.connect('SQL/Main.db')
     c = conn.cursor()
     c.execute("INSERT INTO USER VALUES(:id,:email,:name,:passd,:type)",{'id':id,'email':email,'name':name,'passd':password,'type':types})
     c.execute("SELECT * FROM USER ")
     conn.commit()
-    conn.close()    
+    conn.close()
 
 @login_required
 def question(request):
 	return render(request, "tc_app/question.html")
 
-@login_required
 def auth(id,passd):
     conn = sqlite3.connect('SQL/Main.db')
     c = conn.cursor()
@@ -57,10 +55,9 @@ def auth(id,passd):
         return [len(l),l]
     else:
         return [len(l),"None"]
-    
+
 
 @csrf_exempt
-@login_required
 def get_element(request):
 	name = request.POST.get("name","")
 	admission = request.POST.get("admission","")
@@ -74,7 +71,6 @@ def get_element(request):
 	return render(request,'tc_app/index.html')
 
 @csrf_exempt
-@login_required				
 def get_element_log(request):
 	admission = request.POST.get("ad","")
 	password = request.POST.get("pass","")
@@ -82,8 +78,10 @@ def get_element_log(request):
 	request.session['user'] = admission
 	l=auth(admission,password)
 	print(l)
+
+	print("get_element_log")
 	# print(str(admission)+" "+str(password))  #to see the form fiels results
-	return JsonResponse({"l":l})					
+	return JsonResponse({"l":l})
 
 @login_required
 def test(request):
