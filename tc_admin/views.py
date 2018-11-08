@@ -13,15 +13,18 @@ def login(request):
     return render(request,'tc_admin/login.html')    
 
 def insert_test(question,a,b,c,d,val):
+    print(question)
+
     conn=sqlite3.connect('SQL/Main.db')
-    c=conn.cursor()
+    cur=conn.cursor()
     for i in range(len(question)):
         p=[]
+        print(i)
         p.extend([a[i],b[i],c[i],d[i]])
-        c.execute("INSERT INTO QUES(Ques,Ans_option,Ans_correct) VALUES(:q,:o,:val)",{'q':question[i],'o':str(p),'val':val[i]})
+        cur.execute("INSERT INTO QUES(Ques,Ans_option,Ans_correct) VALUES(:q,:o,:val)",{'q':question[i],'o':str(p),'val':val[i]})
         conn.commit()
-    c.execute("SELECT * FROM QUES")
-    print(c.fetchall())
+    cur.execute("SELECT * FROM QUES")
+    print(cur.fetchall())
     conn.close()              
         
 
@@ -49,17 +52,20 @@ def createtest(request):
 @csrf_exempt
 def create_test_form(request):
     question=request.POST.getlist('question')
+    print(question)
     a=request.POST.getlist('A')
     b=request.POST.getlist('B')
     c=request.POST.getlist('C')
     d=request.POST.getlist('D')
+    print(a,b,c,d)
     val=request.POST.getlist('check')
-    insert_test(question,a,b,c,d,val) # insert function
-    print(question)
-    print(a)
-    print(b)
-    print(c)
-    print(d)
     print(val)
+    insert_test(question,a,b,c,d,val) # insert function
+    # print(question)
+    # print(a)
+    # print(b)
+    # print(c)
+    # print(d)
+    # print(val)
 
     return HttpResponse("hi")
