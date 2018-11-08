@@ -52,14 +52,18 @@ def createtest(request):
 @csrf_exempt
 def create_test_form(request):
     question=request.POST.getlist('question')
-    print(question)
+    test_title=request.POST.get('test_title')
+    test_des=request.POST.get('test_des')
+    test_duration=request.POST.get('test_duration')
+    test_tags=request.POST.get('test_tags')
     a=request.POST.getlist('A')
     b=request.POST.getlist('B')
     c=request.POST.getlist('C')
     d=request.POST.getlist('D')
-    print(a,b,c,d)
+    # print(a,b,c,d)
+    print(test_title,test_des,test_duration,test_tags)
     val=request.POST.getlist('check')
-    print(val)
+    # print(val)
     insert_test(question,a,b,c,d,val) # insert function
     # print(question)
     # print(a)
