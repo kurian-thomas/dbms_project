@@ -41,3 +41,12 @@ variables:
     c
     d
     val  ------------->value of each check box
+
+
+add these details to a seperate menu with test_title as primary key 
+	test_title
+    test_des
+    test_duration
+    test_tags
+
+then add test_title as foreign key to questions table to impliment 1:n correspondance     
