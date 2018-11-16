@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse,JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import sqlite3
+
+from .decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -10,6 +12,7 @@ def index(request):
 def login(request):
 	return render(request,'tc_app/login.html')
 
+@login_required
 def dashboard(request):
 
 	try:
@@ -35,9 +38,9 @@ def insert_sql(id,name,email,password,types):
     c.execute("INSERT INTO USER VALUES(:id,:email,:name,:passd,:type)",{'id':id,'email':email,'name':name,'passd':password,'type':types})
     c.execute("SELECT * FROM USER ")
     conn.commit()
-    conn.close()    
+    conn.close()
 
-
+@login_required
 def question(request):
 	return render(request, "tc_app/question.html")
 
@@ -52,7 +55,7 @@ def auth(id,passd):
         return [len(l),l]
     else:
         return [len(l),"None"]
-    
+
 
 @csrf_exempt
 def get_element(request):
@@ -67,7 +70,7 @@ def get_element(request):
 
 	return render(request,'tc_app/index.html')
 
-@csrf_exempt				
+@csrf_exempt
 def get_element_log(request):
 	admission = request.POST.get("ad","")
 	password = request.POST.get("pass","")
@@ -75,8 +78,19 @@ def get_element_log(request):
 	request.session['user'] = admission
 	l=auth(admission,password)
 	print(l)
-	# print(str(admission)+" "+str(password))  #to see the form fiels results
-	return JsonResponse({"l":l})					
 
+	print("get_element_log")
+	# print(str(admission)+" "+str(password))  #to see the form fiels results
+	return JsonResponse({"l":l})
+
+@login_required
 def test(request):
 	return render(request,'tc_app/question.html')
+
+@login_required
+def logout(request):
+    try:
+        del request.session['user']
+        return HttpResponseRedirect("/tc/login/")
+    except:
+        return HttpResponseRedirect("/tc/login/")

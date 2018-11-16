@@ -28,7 +28,29 @@ c.execute('''CREATE TABLE USER
 
 c.execute("DROP TABLE use")
 
-conn.commit()
 
+c.execute("DROP TABLE QUES")
+
+c.execute('''CREATE TABLE QUES
+          (id INTEGER PRIMARY KEY AUTOINCREMENT,
+           Ques text NOT NULL,
+           Ans_option text NOT NULL,
+           Ans_correct text NOT NULL)''')
+
+c.execute("DROP TABLE ANS")
+
+c.execute("DROP TABLE USER_RESPONSE")
+c.execute('''CREATE TABLE USER_RESPONSE
+          (user_id INTEGER PRIMARY KEY,
+           test_id INTEGER NOT NULL,
+           question_id INTEGER NOT NULL,
+           FOREIGN KEY(user_id) REFERENCES USER(id),
+           FOREIGN KEY(test_id) REFERENCES TEST(id),
+           FOREIGN KEY(question_id) REFERENCES QUES(id))''') 
+
+              
+    
+# Run the file and remove the comments from it, thereadter.
+conn.commit()
 # updated
 conn.close()

@@ -1,32 +1,22 @@
+{% extends 'tc_app/base.html' %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Sign up</title>
-	<link rel="stylesheet" type="text/css" href="{% static "c.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap.css" %}">
-</head>
-<body>
+{% block body %}
 	<div class="container">
-    <div class="col-md-6">
-    <div id="logbox">
-      <form id="sign_in" method="post" action="/signup">
-        <h1>create an account</h1>
-        <input name="name" type="text" placeholder="What's your username?" autofocus="autofocus" required="required" class="input pass" id="sname" />
-        <input name="password" type="password" placeholder="Enter a password" required="required" class="input pass
-         " id="spass" />
-        <input name="admission no" type="name" placeholder="Admission no" required="required" class="input pass" id="sad" />
-        <input name="email" type="email" placeholder="Email address" class="input pass" required="required" id="semail" />
-        <a class="btn btn-lg btn-success btn-block" id="sigbutton" onclick="get_element_signup()">Sign me up! </a>
-        <div class="text-center">
-            already have an account? <a href="#" id="login_id">login</a>
-        </div>
-      </form>
-    </div>
-	</div>
-</div>
-</body>
-
-
-
-</html>
+		<div class="col-md-3"></div>
+		  <div class="col-md-6">
+		    	<div id="logbox">
+		      	<form id="sign_in" method="post" action="/signup">
+		        	<h1>Create an account</h1>
+		        	<input name="name" type="text" placeholder="Username" autofocus="autofocus" required="required" class="input pass" id="sname" />
+		        	<input name="password" type="password" placeholder="Password" required="required" class="input pass" id="spass" />
+		        	<input name="admission no" type="name" placeholder="Admission Number" required="required" class="input pass" id="sad" />
+		        	<input name="email" type="email" placeholder="E-Mail Address" class="input pass" required="required" id="semail" />
+		        	<a class="btn btn-lg btn-success btn-block" id="sigbutton" onclick="get_element_signup()">Sign me up! </a>
+		        	<div class="text-center">
+		          	Already have an account? <a href="/tc/login" id="login_id">Login</a>
+		        	</div>
+		      	</form>
+		    	</div>
+			</div>
+		</div>
+{% endblock %}

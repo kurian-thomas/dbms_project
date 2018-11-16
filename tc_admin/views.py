@@ -12,6 +12,22 @@ def dashboard(request):
 def login(request):
     return render(request,'tc_admin/login.html')    
 
+def insert_test(question,a,b,c,d,val):
+    print(question)
+
+    conn=sqlite3.connect('SQL/Main.db')
+    cur=conn.cursor()
+    for i in range(len(question)):
+        p=[]
+        print(i)
+        p.extend([a[i],b[i],c[i],d[i]])
+        cur.execute("INSERT INTO QUES(Ques,Ans_option,Ans_correct) VALUES(:q,:o,:val)",{'q':question[i],'o':str(p),'val':val[i]})
+        conn.commit()
+    cur.execute("SELECT * FROM QUES")
+    print(cur.fetchall())
+    conn.close()              
+        
+
 @csrf_exempt
 def auth(name,passd):
     conn=sqlite3.connect('SQL/Main.db')
@@ -35,24 +51,25 @@ def createtest(request):
 
 @csrf_exempt
 def create_test_form(request):
-    print(request.POST)
-    questions = request.POST.getlist('question')
-    options_a = request.POST.getlist('A')
-    options_b = request.POST.getlist('B')
-    options_c = request.POST.getlist('C')
-    options_d = request.POST.getlist('D')
-    answers = request.POST.getlist('answer')
-    test_title = request.POST.get('test_title')
-    test_desc = request.POST.get('test_desc')
-    test_date = request.POST.get('test_date')
-    test_duration = request.POST.get('test_duration')
-    test_tags = request.POST.get('test_tags')
-    print(questions)
-    print(options_a)
-    print(options_b)
-    print(options_c)
-    print(options_d)
-    print(answers)
-    print(test_title, test_desc, test_date, test_duration, test_tags)
+    question=request.POST.getlist('question')
+    test_title=request.POST.get('test_title')
+    test_des=request.POST.get('test_des')
+    test_duration=request.POST.get('test_duration')
+    test_tags=request.POST.get('test_tags')
+    a=request.POST.getlist('A')
+    b=request.POST.getlist('B')
+    c=request.POST.getlist('C')
+    d=request.POST.getlist('D')
+    # print(a,b,c,d)
+    print(test_title,test_des,test_duration,test_tags)
+    val=request.POST.getlist('check')
+    # print(val)
+    insert_test(question,a,b,c,d,val) # insert function
+    # print(question)
+    # print(a)
+    # print(b)
+    # print(c)
+    # print(d)
+    # print(val)
 
     return HttpResponse("hi")

@@ -1,7 +1,7 @@
-var x = document.getElementById("sign_in").elements;
 
  function get_element_signup(){
  	console.log("in get");
+  var x = document.getElementById("sign_in").elements;
  	var n=x[0].value;
  	var p=x[1].value;
  	var ad=x[2].value;
@@ -27,7 +27,7 @@ var x = document.getElementById("sign_in").elements;
  			$('.ajaxProgress').hide();
  		}
  	});
- } 
+ }
 
 function get_element_log(){
  	console.log("in login");
@@ -60,7 +60,7 @@ function get_element_log(){
  						$("#intro").html("welcome "+n);
  					}
  					//console.log(data.l[1][0])
- 					
+
  			}
  			else{
  				alert("password or username is incorrect");
@@ -68,8 +68,8 @@ function get_element_log(){
  			$('.ajaxProgress').hide();
  		}
  	});
- 			
- } 
+
+ }
 
 
 function get_element_adminlog(){
@@ -103,9 +103,5 @@ function get_element_adminlog(){
  			$('.ajaxProgress').hide();
  		}
  	});
- 			
- } 
 
- 
-
-
+ }
