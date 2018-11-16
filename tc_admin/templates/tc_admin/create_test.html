@@ -22,6 +22,11 @@ $( document ).ready(function() {
 
       // Finally insert $klon wherever you want
       $div.after( $klon );
+      //clearing old responses
+      $("#question"+(num)+" textarea").val("");
+      $("#question"+(num)+" input").val("");
+      // $("#question"+(num)+" input[type=checkbox]").prop('checked', false);
+      // $("#question"+(num)+" input[type=checkbox]").attr('name', 'check'+(num));
       $("#question"+(num)+" #num_title").text(num);
 
     });
@@ -50,24 +55,24 @@ $( document ).ready(function() {
                                     <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label>Test Title</label>
-                                                <input class="form-control">
+                                                <input type="text" name="test_title" class="form-control">
                                                 <p class="help-block">Example: Data Structures</p>
                                             </div>
                                             <div class="form-group">
                                                 <label>Description</label>
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea name="test_desc" class="form-control" rows="3"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Test Date</label>
-                                                <input class="form-control">
+                                                <input type="date" name="test_date" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Duration</label>
-                                                <input type="number" class="form-control">
+                                                <input type="number" name="test_duration" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Tags</label>
-                                                <input class="form-control">
+                                                <input name="test_tags" class="form-control">
                                             </div>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
@@ -113,22 +118,27 @@ $( document ).ready(function() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Correct Answer</label>
-                                            <div class="form-group row">
-                                                <label class="checkbox-inline col-lg-2 col-lg-offset-1">
-                                                    <input type="checkbox" name="check" value="1">A
-                                                </label>
-                                                <label class="checkbox-inline col-lg-2">
-                                                    <input type="checkbox" name="check" value="2">B
-                                                </label>
-                                                <label class="checkbox-inline col-lg-2">
-                                                    <input type="checkbox" name="check" value="3">C
-                                                </label>
-                                                <label class="checkbox-inline col-lg-2">
-                                                    <input type="checkbox" name="check" value="4">D
-                                                </label>
-                                            </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-4">
+                                           <label for="selectAns">Correct Answer</label>
+                                           </div>
+                                           <div class="col-lg-8">
+                                            <label class="checkbox-inline"><input type="checkbox" value="A" name="ans">A</label>
+                                            <label class="checkbox-inline"><input type="checkbox" value="B" name="ans">B</label>
+                                            <label class="checkbox-inline"><input type="checkbox" value="C" name="ans">C</label>
+                                            <!--
+                                           <label class="radio-inline"><input type="radio" name="A" value="A">A</label>
+                                           <label class="radio-inline"><input type="radio" name="B" value="B">B</label>
+                                           <label class="radio-inline"><input type="radio" name="C" value="C">C</label>
+                                           <label class="radio-inline"><input type="radio" name="D" value="D">D</label>-->
+                                           </div>
+                                           <!--select id="selectAns" class="form-control" name="answer">
+                                               <option>A</option>
+                                               <option>B</option>
+                                               <option>C</option>
+                                               <option>D</option>
+                                           </select-->
+                                           
                                         </div>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
