@@ -64,12 +64,12 @@ def create_test_form(request):
     print(test_title,test_des,test_duration,test_tags)
     val=request.POST.getlist('check')
     # print(val)
-    insert_test(question,a,b,c,d,val) # insert function
+    # insert_test(question,a,b,c,d,val) # insert function
     # print(question)
     # print(a)
     # print(b)
     # print(c)
     # print(d)
-    # print(val)
+    print(val)
 
     return HttpResponse("hi")
