@@ -40,9 +40,6 @@ def insert_sql(id,name,email,password,types):
     conn.commit()
     conn.close()
 
-@login_required
-def question(request):
-	return render(request, "tc_app/question.html")
 
 def auth(id,passd):
     conn = sqlite3.connect('SQL/Main.db')
@@ -85,7 +82,7 @@ def get_element_log(request):
 
 @login_required
 def test(request):
-	return render(request,'tc_app/question.html')
+	return render(request,'tc_app/test.html')
 
 @login_required
 def logout(request):

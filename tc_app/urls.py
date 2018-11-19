@@ -11,6 +11,6 @@ urlpatterns = [
 	url(r'^login/', views.login, name='login'),
 	url(r'^dashboard/', views.dashboard, name='dashboard'),
 	url(r'^get_element/', views.get_element, name='get_element'),
-	url(r'^question/', views.question, name='question'),
+	url(r'^test/', views.test, name='test'),
 	url(r'^logout/', views.logout, name='logout'),
 ]
