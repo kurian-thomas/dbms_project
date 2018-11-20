@@ -63,6 +63,7 @@ c.execute('''CREATE TABLE TEST(
     test_tags text NOT NULL)''')
 
 c.execute('''DROP TABLE TEST_Q ''');
+
 c.execute('''CREATE TABLE TEST_Q(
         id INTEGER PRIMARY KEY,
         qid INTEGER NOT NULL,

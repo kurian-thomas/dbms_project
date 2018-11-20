@@ -13,3 +13,10 @@ Admin values to be inserted
     4) At the end of the input function data present in the db is printed
     
         
+------------------------------------------------------------------
+
+1) Run the update_table.py in the SQL folder once.
+2) Remove the comments thereafter. 
+3) Two tables are created a) test table
+                          b) Table : taking primary keys of test and ques table
+                              basically combining ques and test table.
