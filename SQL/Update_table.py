@@ -62,9 +62,11 @@ c.execute('''CREATE TABLE TEST(
     Date_Time datetime,
     test_tags text NOT NULL)''')
 
+c.execute('''DROP TABLE TEST_Q ''');
 c.execute('''CREATE TABLE TEST_Q(
-        qid INTEGER,
-        testid text PRIMARY KEY,
+        id INTEGER PRIMARY KEY,
+        qid INTEGER NOT NULL,
+        testid text NOT NULL,
         FOREIGN KEY(qid) REFERENCES QUES(id),
         FOREIGN KEY(testid) REFERENCES TEST(test_id)) ''')
               
