@@ -55,15 +55,15 @@
             display.textContent = minutes + ":" + seconds;
 
             if (--timer < 0) {
-                $('#submit').click()
+                console.log(timer);
+                $('#submit').click();
                 timer = duration;
             }
         }, 1000);
     }
 
     window.onload = function () {
-        var fiveMinutes = 60 * 5,
-            display = document.querySelector('#time');
+        var fiveMinutes = 60 , display = document.querySelector('#time');
         startTimer(fiveMinutes, display);
     };
 
@@ -74,7 +74,7 @@
 </head>
 <body>
     <div id="wrapper">
-
+        <form id="submit_form" action="/tc/test/" method="POST">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -95,7 +95,7 @@
                     </a>
                 </li>
                 <li>
-                    <button id="submit" class="btn btn-success">Submit</button>
+                    <input type="submit" id="submit" class="btn btn-success"></input>
                 </li>
                 <!-- /.dropdown -->
             </ul>
@@ -129,7 +129,6 @@
                                 <p>Choose the correct option</p>
                             </div>
                             <div class="panel-footer">
-                                <form action="/tc/test/" method="POST">
                                     {% for question in questions %}
                                         <div class="panel-body">
                                             {{ question.question }}
@@ -160,7 +159,7 @@
                                     <br>
                                     <div class="row">
                                       <div class="col-md-1">
-                                            <button id="submit" class="btn btn-success">Submit</button>
+                                            <input type="submit" id="submit" class="btn btn-success"></input>
                                       </div>
                                     </div>
                                     <br>
@@ -172,7 +171,6 @@
                                             <button class="btn btn-primary">Next</button>
                                         </div>
                                     </div> -->
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -183,6 +181,7 @@
                 </div>
                 <!-- /.container-fluid -->
             </div>
+            </form>
         </div>
     </body>
 </html>
