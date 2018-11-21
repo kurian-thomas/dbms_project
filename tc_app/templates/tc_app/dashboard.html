@@ -82,11 +82,91 @@
                     </div>
                     <!-- /.panel-body -->
                 </div>
+                <div class="row">
+                    <div class="col col-md-6">  
+                        <div id="piechart"></div>
+                        <script type="text/javascript">
+                            // Load google charts
+                            google.charts.load('current', {'packages':['corechart']});
+                            google.charts.setOnLoadCallback(drawChart);
 
-                
-                <!-- /.panel -->
+                            // Draw the chart and set the chart values
+                            function drawChart() {
+                            var data = google.visualization.arrayToDataTable([
+                            ['Test', 'Correct answers'],
+                            ['TEST 1', 8],
+                            ['TEST 2', 2],
+                            ['TEST 3', 5],
+                            ['TEST 4', 2],
+                            ['TEST 5', 8]
+                            ]);
+
+                            // Optional; add a title and set the width and height of the chart
+                            var options = {'title':'{{ user_name }}\'s PERFORMANCE', 'width':450, 'height':300};
+
+                            // Display the chart inside the <div> element with id="piechart"
+                            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                            chart.draw(data, options);
+                            }
+                        </script><!-- /.panel -->
+                    </div>
+                    <script>
+                    window.onload = function () {
+
+                    var dps = []; // dataPoints
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        title :{
+                            text: "Dynamic Data"
+                        },
+                        axisY: {
+                            includeZero: false
+                        },      
+                        data: [{
+                            type: "line",
+                            dataPoints: dps
+                        }]
+                    });
+
+                    var xVal = 0;
+                    var yVal = 100; 
+                    var updateInterval = 1000;
+                    var dataLength = 20; // number of dataPoints visible at any point
+
+                    var updateChart = function (count) {
+
+                        count = count || 1;
+
+                        for (var j = 0; j < count; j++) {
+                            yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+                            dps.push({
+                                x: xVal,
+                                y: yVal
+                            });
+                            xVal++;
+                        }
+
+                        if (dps.length > dataLength) {
+                            dps.shift();
+                        }
+
+                        chart.render();
+                    };
+
+                    updateChart(dataLength);
+                    setInterval(function(){updateChart()}, updateInterval);
+
+                    }
+                    </script>
+                    <div class="col col-md-6"> 
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div id="chartContainer" style="height: 100px; width: 100%;"></div>
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                    </div>
+                </div>
             </div>
-
             <!-- /.col-lg-8 -->
             <div class="col-lg-4">
                 <div class="panel panel-default">
