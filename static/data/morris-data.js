@@ -3,10 +3,11 @@ $(function() {
     Morris.Area({
         element: 'morris-area-chart',
         data: [{
-            period: '2010 Q1',
-            iphone: 2666,
-            ipad: null,
-            itouch: 2647
+            period: '2010 ',
+            iphone:400,
+            ipad: 1000,
+            itouch:1400,
+            test:1500
         }, {
             period: '2010 Q2',
             iphone: 2778,
@@ -18,7 +19,7 @@ $(function() {
             ipad: 1969,
             itouch: 2501
         }, {
-            period: '2010 Q4',
+            period: '2011 Q4',
             iphone: 3767,
             ipad: 3597,
             itouch: 5689
@@ -49,12 +50,12 @@ $(function() {
             itouch: 2028
         }, {
             period: '2012 Q2',
-            iphone: 8432,
-            ipad: 5713,
-            itouch: 1791
+            iphone: 432,
+            ipad: 713,
+            itouch: 791
         }],
         xkey: 'period',
-        ykeys: ['iphone', 'ipad', 'itouch'],
+        ykeys: ['iphone', 'ipad', 'itouch','test'],
         labels: ['iPhone', 'iPad', 'iPod Touch'],
         pointSize: 2,
         hideHover: 'auto',

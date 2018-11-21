@@ -53,6 +53,7 @@ c.execute('''CREATE TABLE USER_RESPONSE
            FOREIGN KEY(test_id) REFERENCES TEST(id),
            FOREIGN KEY(question_id) REFERENCES QUES(id))''') 
 """
+
 c.execute("DROP TABLE TEST")
 
 c.execute('''CREATE TABLE TEST(
@@ -62,7 +63,6 @@ c.execute('''CREATE TABLE TEST(
     Date_Time datetime,
     test_tags text NOT NULL)''')
 
-c.execute('''DROP TABLE TEST_Q ''');
 
 c.execute('''CREATE TABLE TEST_Q(
         id INTEGER PRIMARY KEY,
