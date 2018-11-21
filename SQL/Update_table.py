@@ -11,7 +11,7 @@ conn=sqlite3.connect('Main.db')
 
 c=conn.cursor()
 
-
+"""
 c.execute("ALTER TABLE QUES RENAME TO quet")
 
 c.execute("CREATE TABLE QUES (id INTEGER PRIMARY KEY,Ques text NOT NULL,Pos_marks INTEGER,Neg_marks INTEGER)")
@@ -37,7 +37,12 @@ c.execute('''CREATE TABLE QUES
            Ans_option text NOT NULL,
            Ans_correct text NOT NULL)''')
 
-c.execute("DROP TABLE ANS")
+c.execute("DROP TABLE TEST")
+c.execute('''CREATE TABLE TEST(
+    test_title text PRIMARY KEY,
+    test_des text NOT NULL,
+    test_duration real NOT NULL,
+    test_tags text NOT NULL)''')
 
 c.execute("DROP TABLE USER_RESPONSE")
 c.execute('''CREATE TABLE USER_RESPONSE
@@ -47,9 +52,26 @@ c.execute('''CREATE TABLE USER_RESPONSE
            FOREIGN KEY(user_id) REFERENCES USER(id),
            FOREIGN KEY(test_id) REFERENCES TEST(id),
            FOREIGN KEY(question_id) REFERENCES QUES(id))''') 
+"""
+c.execute("DROP TABLE TEST")
 
+c.execute('''CREATE TABLE TEST(
+    test_id text PRIMARY KEY,
+    test_title text NOT NULL,
+    test_duration real NOT NULL,
+    Date_Time datetime,
+    test_tags text NOT NULL)''')
+
+c.execute('''DROP TABLE TEST_Q ''');
+
+c.execute('''CREATE TABLE TEST_Q(
+        id INTEGER PRIMARY KEY,
+        qid INTEGER NOT NULL,
+        testid text NOT NULL,
+        FOREIGN KEY(qid) REFERENCES QUES(id),
+        FOREIGN KEY(testid) REFERENCES TEST(test_id)) ''')
               
-    
+
 # Run the file and remove the comments from it, thereadter.
 conn.commit()
 # updated
