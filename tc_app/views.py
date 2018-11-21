@@ -3,6 +3,9 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import sqlite3
 
+import json
+import ast
+
 from .decorators import login_required
 # Create your views here.
 
@@ -80,9 +83,36 @@ def get_element_log(request):
 	# print(str(admission)+" "+str(password))  #to see the form fiels results
 	return JsonResponse({"l":l})
 
+@csrf_exempt
 @login_required
-def test(request):
-	return render(request,'tc_app/test.html')
+def test(request, test_number = 0):
+	if request.method == 'POST':
+		# print("Enter the POST method")
+		# a=request.POST.getlist('A')
+		# b=request.POST.getlist('B')
+		# c=request.POST.getlist('C')
+		# d=request.POST.getlist('D')
+		print(request.POST)
+		# print(a,b,c,d)
+		return render(request, 'tc_app/dashboard.html')
+	else:
+		dict={}
+		if test_number == 0:
+			return render(request, 'tc_app/dashboard.html')
+		else:
+			#retrieve the questions from the table 
+			conn=sqlite3.connect('SQL/Main.db')
+			cur = conn.cursor()
+			questions_object = cur.execute("Select * from QUES")
+			questions=[]
+			
+			for i in questions_object:
+				options = ast.literal_eval(i[2])
+				print(options)
+				questions.append({"q_id":i[0], "question": i[1], "question_options": options})
+
+			dict['questions'] = questions
+			return render(request,'tc_app/test.html',dict)
 
 @login_required
 def logout(request):

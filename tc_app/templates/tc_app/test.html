@@ -55,16 +55,21 @@
             display.textContent = minutes + ":" + seconds;
 
             if (--timer < 0) {
+                $('#submit').click()
                 timer = duration;
             }
         }, 1000);
     }
 
-window.onload = function () {
-    var fiveMinutes = 60 * 5,
-        display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
-};
+    window.onload = function () {
+        var fiveMinutes = 60 * 5,
+            display = document.querySelector('#time');
+        startTimer(fiveMinutes, display);
+    };
+
+    function questionClicked(question_id){
+        console.log(question_id)
+    }
 </script>
 </head>
 <body>
@@ -90,7 +95,7 @@ window.onload = function () {
                     </a>
                 </li>
                 <li>
-                    <button class="btn btn-success">Submit</button>
+                    <button id="submit" class="btn btn-success">Submit</button>
                 </li>
                 <!-- /.dropdown -->
             </ul>
@@ -99,19 +104,11 @@ window.onload = function () {
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-
-                        <li>
-                            <a href="#">Question #1</a>
-                        </li>
-                        <li>
-                            <a href="#">Question #2</a>
-                        </li>
-                        <li>
-                            <a class="active" href="#">Question #3</a>
-                        </li>
-                        <li>
-                            <a href="#">Question #4</a>
-                        </li>
+                        {% for i in questions %}
+                            <li>
+                                <a href="#" onClick="questionClicked( {{ i.q_id }} )">{{ i.q_id }} <span>{{ i.question | slice:":20" }}</span></a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -129,50 +126,52 @@ window.onload = function () {
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Question #3
-                            </div>
-                            <div class="panel-body">
-                                <p>Which of the following is used in a stack ?</p>
+                                <p>Choose the correct option</p>
                             </div>
                             <div class="panel-footer">
-                                <form action="" method="POST" role="form">
-                                    <div class="form-group">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="">FIFO
-                                            </label>
+                                <form action="/tc/test/" method="POST">
+                                    {% for question in questions %}
+                                        <div class="panel-body">
+                                            {{ question.question }}
                                         </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="">LIFO
-                                            </label>
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"  name="{{ question.q_id }}" value="A">{{ question.question_options.0 }}
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"  name="{{ question.q_id }}" value="B">{{ question.question_options.1 }}
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"  name="{{ question.q_id }}" value="C">{{ question.question_options.2 }}
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"  name="{{ question.q_id }}" value="D">{{ question.question_options.3 }}
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="">PUSH
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="">Dequeue
-                                            </label>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
                                     <br>
                                     <div class="row">
                                       <div class="col-md-1">
-                                            <button class="btn btn-success">Save Response</button>
+                                            <button id="submit" class="btn btn-success">Submit</button>
                                       </div>
                                     </div>
                                     <br>
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-md-1">
                                             <button class="btn btn-primary">Previous</button>
                                         </div>
                                         <div class="col-md-1 col-md-offset-10">
                                             <button class="btn btn-primary">Next</button>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </form>
                             </div>
                         </div>
@@ -185,5 +184,5 @@ window.onload = function () {
                 <!-- /.container-fluid -->
             </div>
         </div>
-</body>
+    </body>
 </html>
