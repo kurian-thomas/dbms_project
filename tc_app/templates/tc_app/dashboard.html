@@ -76,6 +76,7 @@
                             google.charts.setOnLoadCallback(drawChart);
 
                             // Draw the chart and set the chart values
+                            //pi chart representing no of users attended per test
                             function drawChart() {
                             var data = google.visualization.arrayToDataTable([
                             ['Test', 'Correct answers'],
@@ -102,26 +103,31 @@
                         animationEnabled: true,
                         theme: "light2",
                         title:{
-                            text: "Simple Line Chart"
+                            text: "{{ user_name }}\'s Progress Graph"
+                        },
+                        axisX:{
+                          title:'Test Number'
                         },
                         axisY:{
-                            includeZero: true
+                            includeZero: true,
+                            title:'% of score'
                         },
                         data: [{        
                             type: "line",       
                             dataPoints: [
-                                { y: 450 },
-                                { y: 414},
-                                { y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
-                                { y: 460 },
-                                { y: 450 },
-                                { y: 500 },
-                                { y: 480 },
-                                { y: 480 },
-                                { y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
-                                { y: 500 },
-                                { y: 480 },
-                                { y: 510 }
+                                // { y: 450 },
+                                // { y: 414},
+                                // { y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+                                // { y: 460 },
+                                // { y: 450 },
+                                // { y: 500 },
+                                // { y: 480 },
+                                // { y: 480 },
+                                // { y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+                                // { y: 500 },
+                                // { y: 480 },
+                                {x: 4 ,y: 210 },
+                                {y:100}
                             ]
                         }]
                     });
@@ -129,22 +135,18 @@
 
                     }
                     </script>
-                    <div class="col col-md-6"> 
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <button class="btn btn-primary" id="but">test</button>
-                        <div id="chartContainer" style="height: 100px; width: 100%;"></div>
+
+                </div>
+                    <div class="col col-md-8"> 
+                        <div id="chartContainer" style="height: 200px; width: 100%;"></div>
                         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                     </div>
-                </div>
             </div>
             <!-- /.col-lg-8 -->
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                        <i class="fa fa-bell fa-fw"></i> Recommendation Panel
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -196,7 +198,6 @@
                             </a>
                         </div>
                         <!-- /.list-group -->
-                        <a href="#" class="btn btn-default btn-block">View All Alerts</a>
                     </div>
                     <!-- /.panel-body -->
                 </div>

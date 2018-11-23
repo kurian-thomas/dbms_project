@@ -20,3 +20,6 @@ Admin values to be inserted
 3) Two tables are created a) test table
                           b) Table : taking primary keys of test and ques table
                               basically combining ques and test table.
+
+
+##test attended coloum,for group by dept add class dropdown in index                                 
