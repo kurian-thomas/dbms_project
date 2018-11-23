@@ -44,41 +44,26 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="row">
-                            <a href="/tc/test/">
-                                <div class="col col-lg-6">
+                            {% for test in tests %}
+                            <div class="col col-lg-6">
+                                <a href="/tc/test/{{ test.id }}">
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
-                                            Data Structures
+                                            {{ test.title }}
                                         </div>
                                         <div class="panel-body">
-                                            <p>Basics of data structures - linked lists, stacks and queues</p>
+                                            <p>{{ test.description }}</p>
                                         </div>
                                         <div class="panel-footer">
-                                            Date: 2 November 2018<br>
-                                            Duration: 1 hour 
+                                            Date: {{ test.date }}<br>
+                                            Time: {{ test.time }}<br>
+                                            Duration: {{ test.duration }} {% if test.duration > 1 %} hours {% else %} hour {% endif %}
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                            <div class="col col-lg-6" >
-                                  <a href="/tc/test/">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        Data Structures
-                                    </div>
-                                    <div class="panel-body">
-                                        <p>Basics of data structures - linked lists, stacks and queues</p>
-                                    </div>
-                                    <div class="panel-footer">
-                                        Date: 2 November 2018<br>
-                                        Duration: 1 hour 
-                                    </div>
-                                </div>
+                                </a>
                             </div>
-                        </a>
+                            {% endfor %}
                         </div>
-                      
-
                     </div>
                     <!-- /.panel-body -->
                 </div>

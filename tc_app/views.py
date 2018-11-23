@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import sqlite3
+from datetime import datetime
 
 import json
 import ast
@@ -36,9 +37,19 @@ def dashboard(request):
 	# Fetch all the tests from database
 	conn = sqlite3.connect('SQL/Main.db')
 	c = conn.cursor()
+	tests = []
 	for row in c.execute("SELECT * FROM TEST"):
-		print row[0]
-	return render(request,'tc_app/dashboard.html',{'user_name': user_name})
+		date = datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S")
+		tests.append({
+			'id': row[0],
+			'title': row[1],
+			'description': row[2],
+			'date': date.strftime("%d-%B-%Y"),
+			'time': date.strftime('%I:%M %p'),
+			'duration': row[4]
+			})
+	conn.close()
+	return render(request,'tc_app/dashboard.html',{'user_name': user_name, 'tests': tests})
 
 def insert_sql(id,name,email,password,types):
     conn = sqlite3.connect('SQL/Main.db')
