@@ -4,7 +4,10 @@ from django.http import HttpResponseRedirect,JsonResponse
 def login_required(view_func):
 	def login_check(request, test_number = 0):
 		if 'user' in request.session:
-			return view_func(request, test_number)
+			try:
+				return view_func(request, test_number)
+			except:
+				return view_func(request)
 		else :
 			return HttpResponseRedirect('/tc/login')
 	return login_check
