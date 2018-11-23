@@ -52,7 +52,6 @@ c.execute('''CREATE TABLE USER_RESPONSE
            FOREIGN KEY(user_id) REFERENCES USER(id),
            FOREIGN KEY(test_id) REFERENCES TEST(id),
            FOREIGN KEY(question_id) REFERENCES QUES(id))''') 
-"""
 
 c.execute("DROP TABLE TEST")
 
@@ -70,6 +69,14 @@ c.execute('''CREATE TABLE TEST_Q(
         testid text NOT NULL,
         FOREIGN KEY(qid) REFERENCES QUES(id),
         FOREIGN KEY(testid) REFERENCES TEST(test_id)) ''')
+"""
+
+c.execute(''' CREATE TABLE TEST_REPORT(
+          user_id text NOT NULL, 
+          test_id text NOT NULL,
+          mark decimal(5,2),
+          FOREIGN KEY(user_id) REFERENCES USER(id),
+          FOREIGN KEY(test_id) REFERENCES TEST(test_id)) ''')
               
 
 # Run the file and remove the comments from it, thereadter.
