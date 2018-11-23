@@ -67,10 +67,10 @@
         startTimer(fiveMinutes, display);
 
         $('.question').css({'display': 'none'});
-        $('#question_1').css({'display': 'block'});
+        $('#question_{{ questions.0.q_id }}' ).css({'display': 'block'});
 
         $('.question_select').removeClass('active');
-        $('#question_select1').addClass('active');
+        $('#question_select{{ questions.0.q_id }}' ).addClass('active');
         
     };
 
@@ -90,7 +90,7 @@
 </head>
 <body>
     <div id="wrapper">
-        <form id="submit_form" action="/tc/test/" method="POST">
+        <form id="submit_form" action="/tc/test/{{ test_number }}" method="POST">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -153,22 +153,22 @@
                                             <div class="form-group">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox"  name="{{ question.q_id }}" value="A">{{ question.question_options.0 }}
+                                                        <input type="checkbox"  name="{{ question.q_id }}" value="1">{{ question.question_options.0 }}
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox"  name="{{ question.q_id }}" value="B">{{ question.question_options.1 }}
+                                                        <input type="checkbox"  name="{{ question.q_id }}" value="2">{{ question.question_options.1 }}
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox"  name="{{ question.q_id }}" value="C">{{ question.question_options.2 }}
+                                                        <input type="checkbox"  name="{{ question.q_id }}" value="3">{{ question.question_options.2 }}
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox"  name="{{ question.q_id }}" value="D">{{ question.question_options.3 }}
+                                                        <input type="checkbox"  name="{{ question.q_id }}" value="4">{{ question.question_options.3 }}
                                                     </label>
                                                 </div>
                                             </div>

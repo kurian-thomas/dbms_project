@@ -103,14 +103,28 @@ def get_element_log(request):
 @login_required
 def test(request, test_number = 0):
 	if request.method == 'POST':
-		# print("Enter the POST method")
-		# a=request.POST.getlist('A')
-		# b=request.POST.getlist('B')
-		# c=request.POST.getlist('C')
-		# d=request.POST.getlist('D')
+		print(test_number)
 		print(request.POST)
+		responses = request.POST
+		user_id = request.session['user']
+
+		conn = sqlite3.connect('SQL/Main.db')
+		c = conn.cursor()
+
+		# correct = c.execute("SELECT * FROM QUES WHERE QUES.id = :id",{'id':test_number}).fetchall()
+		# correct = c.execute("SELECT * FROM QUES").fetchall()
+
+		correct = c.execute("SELECT * FROM TEST_Q").fetchall()		
+
+		for i in correct:
+			print(i[0], i[3])
+
+		mark = 0
+
+		for i in request.POST:
+			print(i)
 		# print(a,b,c,d)
-		return render(request, 'tc_app/dashboard.html')
+		return HttpResponseRedirect('/tc/dashboard')
 	else:
 		dict={}
 		if test_number == 0:
@@ -128,6 +142,7 @@ def test(request, test_number = 0):
 				questions.append({"q_id":i[0], "question": i[1], "question_options": options})
 
 			dict['questions'] = questions
+			dict['test_number'] = test_number
 			return render(request,'tc_app/test.html',dict)
 
 @login_required

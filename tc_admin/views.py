@@ -27,10 +27,10 @@ def insert_test(test_title, test_des, test_duration, test_date, test_time, quest
     
     # Inserting questions into QUES Table
     for i in range(len(question)):
-        p=[]
+        p = []
         print(i)
         p.extend([a[i],b[i],c[i],d[i]])
-        cur.execute("INSERT INTO QUES(Ques,Ans_option,Ans_correct) VALUES(:q,:o,:val)",{'q':question[i],'o':str(p),'val':val[i]})
+        cur.execute("INSERT INTO QUES(Ques, ns_option, Ans_correct) VALUES(:q,:o,:val)",{'q':question[i], 'o':str(p), 'val':val[i]})
         conn.commit()
     cur.execute("SELECT * FROM QUES")
     print(cur.fetchall())
@@ -40,19 +40,19 @@ def insert_test(test_title, test_des, test_duration, test_date, test_time, quest
 
 @csrf_exempt
 def auth(name,passd):
-    conn=sqlite3.connect('SQL/Main.db')
-    c=conn.cursor()
-    c.execute("SELECT * FROM ADMIN WHERE ADMIN.Name=:name AND ADMIN.password=:passd",{'name':name,'passd':passd})
-    l=len(c.fetchall())
+    conn = sqlite3.connect('SQL/Main.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM ADMIN WHERE ADMIN.Name=:name AND ADMIN.password=:passd", {'name':name ,'passd':passd})
+    l = len(c.fetchall())
     conn.close()
     return(l)
 
 @csrf_exempt    
 def adlogin(request): 
-    admin_name=request.POST.get("name","")
-    admin_pass=request.POST.get("pass","")
+    admin_name = request.POST.get("name","")
+    admin_pass = request.POST.get("pass","")
     print(str(admin_name)+" "+str(admin_pass))  #to see the form fiels results
-    l=auth(admin_name,admin_pass)
+    l = auth(admin_name,admin_pass)
     print(l);
     return JsonResponse({"l":l})
 
