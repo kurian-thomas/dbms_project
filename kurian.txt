@@ -20,3 +20,8 @@ Admin values to be inserted
 3) Two tables are created a) test table
                           b) Table : taking primary keys of test and ques table
                               basically combining ques and test table.
+-------------------------------------------------------------------
+
+1) Run the update_table.py in the SQL folder
+2) Changes has been made in the insert func of views.py in the tc_admin folder
+3) Insertion to the Test and Test_Q folder,

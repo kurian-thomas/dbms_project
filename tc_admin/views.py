@@ -12,21 +12,45 @@ def dashboard(request):
 def login(request):
     return render(request,'tc_admin/login.html')    
 
-def insert_test(question, a, b, c, d, val):
+def insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags):
     print(question)
 
-    conn = sqlite3.connect('SQL/Main.db')
-    cur = conn.cursor()
+    conn=sqlite3.connect('SQL/Main.db')
+    cur=conn.cursor()
     for i in range(len(question)):
-        p = []
+        p=[]
         print(i)
         p.extend([a[i],b[i],c[i],d[i]])
-        cur.execute("INSERT INTO QUES(Ques, ns_option, Ans_correct) VALUES(:q,:o,:val)",{'q':question[i], 'o':str(p), 'val':val[i]})
+        cur.execute("INSERT INTO QUES(Ques,Ans_option,Ans_correct) VALUES(:q,:o,:val)",{'q':question[i],'o':str(p),'val':val[i]})
         conn.commit()
+    
+    # Inserting Test
+    cur.execute("INSERT INTO TEST(test_title,test_duration,test_des,test_tags) VALUES(:t1,:t2,:t3,:t4)",{'t1':test_title[0],'t2':test_duration[0],'t3':test_des[0],'t4':test_tags[0]})
+    conn.commit()
+
+    # Inserting Test_Q
+
+    test_last_id=cur.execute("SELECT test_id FROM TEST ORDER BY test_id DESC LIMIT 1").fetchone() # Fetch the last test_id
+    ques_last_id=cur.execute("SELECT id FROM QUES ORDER BY id DESC LIMIT 1").fetchone() # Fetch the last qid
+    
+    if(test_last_id==None):
+        test_last_id=(0,)
+
+    if(ques_last_id==None):
+        ques_last_id=(0,)
+
+    ques_last_id=ques_last_id[0]
+    test_last_id=test_last_id[0]
+
+    for i in range(len(question)):
+        ques_last_id+=1
+        cur.execute("INSERT INTO TEST_Q(qid,testid) VALUES(:q1,:q2)",{'q1':ques_last_id,'q2':test_last_id+1})
+        conn.commit()     
+    
+    print((cur.execute("SELECT * FROM TEST_Q")).fetchall())
     cur.execute("SELECT * FROM QUES")
     print(cur.fetchall())
     conn.close()              
-        
 
 @csrf_exempt
 def auth(name,passd):
@@ -64,12 +88,6 @@ def create_test_form(request):
     print(test_title,test_des,test_duration,test_tags)
     val = request.POST.getlist('check')
     # print(val)
-    # insert_test(question,a,b,c,d,val) # insert function
-    # print(question)
-    # print(a)
-    # print(b)
-    # print(c)
-    # print(d)
-    print(val)
+    insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags) # insert function
 
     return HttpResponse("hi")
