@@ -98,7 +98,8 @@
                             ['TEST 2', 2],
                             ['TEST 3', 5],
                             ['TEST 4', 2],
-                            ['TEST 5', 8]
+                            ['TEST 5', 8],
+                            ['TEST 6', 4]
                             ]);
 
                             // Optional; add a title and set the width and height of the chart
@@ -112,48 +113,34 @@
                     </div>
                     <script>
                     window.onload = function () {
-
-                    var dps = []; // dataPoints
-                    var chart = new CanvasJS.Chart("chartContainer", {
-                        title :{
-                            text: "Dynamic Data"
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                        animationEnabled: true,
+                        theme: "light2",
+                        title:{
+                            text: "Simple Line Chart"
                         },
-                        axisY: {
-                            includeZero: false
-                        },      
-                        data: [{
-                            type: "line",
-                            dataPoints: dps
+                        axisY:{
+                            includeZero: true
+                        },
+                        data: [{        
+                            type: "line",       
+                            dataPoints: [
+                                { y: 450 },
+                                { y: 414},
+                                { y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+                                { y: 460 },
+                                { y: 450 },
+                                { y: 500 },
+                                { y: 480 },
+                                { y: 480 },
+                                { y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+                                { y: 500 },
+                                { y: 480 },
+                                { y: 510 }
+                            ]
                         }]
                     });
-
-                    var xVal = 0;
-                    var yVal = 100; 
-                    var updateInterval = 1000;
-                    var dataLength = 20; // number of dataPoints visible at any point
-
-                    var updateChart = function (count) {
-
-                        count = count || 1;
-
-                        for (var j = 0; j < count; j++) {
-                            yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-                            dps.push({
-                                x: xVal,
-                                y: yVal
-                            });
-                            xVal++;
-                        }
-
-                        if (dps.length > dataLength) {
-                            dps.shift();
-                        }
-
-                        chart.render();
-                    };
-
-                    updateChart(dataLength);
-                    setInterval(function(){updateChart()}, updateInterval);
+                    chart.render();
 
                     }
                     </script>
@@ -162,6 +149,7 @@
                         <br>
                         <br>
                         <br>
+                        <button class="btn btn-primary" id="but">test</button>
                         <div id="chartContainer" style="height: 100px; width: 100%;"></div>
                         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                     </div>
