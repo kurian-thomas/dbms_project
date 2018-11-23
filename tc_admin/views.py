@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, HttpResponse
 import sqlite3
 from django.http import HttpResponse,JsonResponse
+from datetime import datetime
 
 # Create your views here.
 def dashboard(request):
@@ -12,11 +13,19 @@ def dashboard(request):
 def login(request):
     return render(request,'tc_admin/login.html')    
 
-def insert_test(question, a, b, c, d, val):
-    print(question)
-
-    conn = sqlite3.connect('SQL/Main.db')
-    cur = conn.cursor()
+def insert_test(test_title, test_des, test_duration, test_date, test_time, question,a,b,c,d,val):
+    # print(question)
+    test_date_time = datetime.strptime(test_date+" "+test_time, '%Y-%d-%m %H:%M')
+    # print(test_date_time)
+    # print(test_title, test_des, test_duration, test_date, test_time)
+    conn=sqlite3.connect('SQL/Main.db')
+    cur=conn.cursor()
+    """
+    # Inserting test values to TEST table
+    cur.execute("INSERT INTO TEST(Title, Description, Date_Time, Duration) VALUES ('{}', '{}', '{}', '{}')".format(test_title, test_des, test_date_time, test_duration))
+    conn.commit()
+    
+    # Inserting questions into QUES Table
     for i in range(len(question)):
         p = []
         print(i)
@@ -25,6 +34,7 @@ def insert_test(question, a, b, c, d, val):
         conn.commit()
     cur.execute("SELECT * FROM QUES")
     print(cur.fetchall())
+    """
     conn.close()              
         
 
@@ -51,25 +61,19 @@ def createtest(request):
 
 @csrf_exempt
 def create_test_form(request):
-    question = request.POST.getlist('question')
-    test_title = request.POST.get('test_title')
-    test_des = request.POST.get('test_des')
-    test_duration = request.POST.get('test_duration')
-    test_tags = request.POST.get('test_tags')
-    a = request.POST.getlist('A')
-    b = request.POST.getlist('B')
-    c = request.POST.getlist('C')
-    d = request.POST.getlist('D')
-    # print(a,b,c,d)
-    print(test_title,test_des,test_duration,test_tags)
-    val = request.POST.getlist('check')
-    # print(val)
-    # insert_test(question,a,b,c,d,val) # insert function
-    # print(question)
-    # print(a)
-    # print(b)
-    # print(c)
-    # print(d)
-    print(val)
+    question=request.POST.getlist('question')
+    test_title=request.POST.get('test_title')
+    test_des=request.POST.get('test_des')
+    test_duration=request.POST.get('test_duration')
+    test_date=request.POST.get('test_date')
+    test_time=request.POST.get('test_time')
+    # test_tags=request.POST.get('test_tags')
+    a=request.POST.getlist('A')
+    b=request.POST.getlist('B')
+    c=request.POST.getlist('C')
+    d=request.POST.getlist('D')
+    val=request.POST.getlist('check')
+    # Disabled insert during testing phase
+    # insert_test(test_title, test_des, test_duration, test_date, test_time, question,a,b,c,d,val) # insert function
 
     return HttpResponse("hi")
