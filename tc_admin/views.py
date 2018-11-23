@@ -55,6 +55,8 @@ def create_test_form(request):
     test_title=request.POST.get('test_title')
     test_des=request.POST.get('test_des')
     test_duration=request.POST.get('test_duration')
+    test_date=request.POST.get('test_date')
+    test_time=request.POST.get('test_time')
     test_tags=request.POST.get('test_tags')
     a=request.POST.getlist('A')
     b=request.POST.getlist('B')

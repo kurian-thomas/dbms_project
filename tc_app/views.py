@@ -33,6 +33,11 @@ def dashboard(request):
 		print("User not registered")
 	conn.close()
 
+	# Fetch all the tests from database
+	conn = sqlite3.connect('SQL/Main.db')
+	c = conn.cursor()
+	for row in c.execute("SELECT * FROM TEST"):
+		print row[0]
 	return render(request,'tc_app/dashboard.html',{'user_name': user_name})
 
 def insert_sql(id,name,email,password,types):
