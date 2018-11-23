@@ -72,15 +72,8 @@ def create_test_form(request):
     b=request.POST.getlist('B')
     c=request.POST.getlist('C')
     d=request.POST.getlist('D')
-    # print(a,b,c,d)
     val=request.POST.getlist('check')
-    # print(val)
-    insert_test(test_title, test_des, test_duration, test_date, test_time, question,a,b,c,d,val) # insert function
-    # print(question)
-    # print(a)
-    # print(b)
-    # print(c)
-    # print(d)
-    print(val)
+    # Disabled insert during testing phase
+    # insert_test(test_title, test_des, test_duration, test_date, test_time, question,a,b,c,d,val) # insert function
 
     return HttpResponse("hi")
