@@ -131,6 +131,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div> 
+            </div>           
+
                         <!-- /.panel-heading -->
                         <div class="row">
                             <div class="col col-md-6"> 
@@ -154,14 +158,22 @@
                                     ]);
 
                                     // Optional; add a title and set the width and height of the chart
-                                    var options = {'title':'Nunmber of students Attended', 'width':550, 'height':400};
+                                    var options = {
+                                        'is3D':true,
+                                        'title':'Nunmber of students Attended Per Test',
+                                        'width':550, 
+                                        'height':400};
 
                                     // Display the chart inside the <div> element with id="piechart"
                                     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
                                     chart.draw(data, options);
                                     }
                                 </script><!-- /.panel -->
-                            </div>    
+                            </div> 
+                            <div class="col col-md-7">
+                                <p>hello</p>
+                                
+                            </div>   
                     </div>
                     <!-- /.panel -->
                     <div class="panel panel-default">
@@ -190,160 +202,75 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>3326</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:29 PM</td>
-                                                    <td>$321.33</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3325</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:20 PM</td>
-                                                    <td>$234.34</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3324</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:03 PM</td>
-                                                    <td>$724.17</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3323</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:00 PM</td>
-                                                    <td>$23.71</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3322</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:49 PM</td>
-                                                    <td>$8345.23</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3321</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:23 PM</td>
-                                                    <td>$245.12</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3320</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:15 PM</td>
-                                                    <td>$5663.54</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3319</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:13 PM</td>
-                                                    <td>$943.45</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.table-responsive -->
+                                <div class="col-lg-8">
+                                <script>
+                                    window.onload = function () {
+
+                                    var chart = new CanvasJS.Chart("chartContainer", {
+                                        theme: "dark2",
+                                        exportFileName: "Doughnut Chart",
+                                        exportEnabled: true,
+                                        animationEnabled: true,
+                                        title: {
+                                            text: "Number Of Students Attended Per Stream",
+                                            fontSize:25
+                                        },
+                                        // subtitles: [{
+                                        //     text: "United Kingdom, 2016",
+                                        //     fontSize: 16
+                                        // }],
+                                        // legend:{
+                                        //  cursor: "pointer",
+                                        //  itemclick: explodePie
+                                        // },
+                                        data: [{
+                                            type: "doughnut",
+                                            innerRadius: 40,
+                                            showInLegend: true,
+                                            toolTipContent: "<b>{name}</b>: {y} ",
+                                            indexLabel: "{name} - #percent% ({y})",
+                                            radius: 80,
+                                            //yValueFormatString: "###0.0\"%\"",
+                                            click: explodePie,
+                                            dataPoints: [
+                                                { y: 450, name: "EC" },
+                                                { y: 120, name: "CS" },
+                                                { y: 300, name: "EEE" },
+                                                { y: 800, name: "BE" }
+                                            ]
+                                        }]
+                                    });
+                                    chart.render();
+
+                                    function explodePie(e) {
+                                        for(var i = 0; i < e.dataSeries.dataPoints.length; i++) {
+                                            if(i !== e.dataPointIndex)
+                                                e.dataSeries.dataPoints[i].exploded = false;
+                                        }
+                                    }
+                                     
+                                    }
+                                </script>
+                                <div id="chartContainer" style="height: 370px; width: 100%;">
+                                    
                                 </div>
-                                <!-- /.col-lg-4 (nested) -->
+                                   
+                                 </div>
+                               
                                 <div class="col-lg-8">
                                     <div id="morris-bar-chart"></div>
                                 </div>
-                                <!-- /.col-lg-8 (nested) -->
+                                
                             </div>
-                            <!-- /.row -->
+                       
                         </div>
-                        <!-- /.panel-body -->
-                    </div>
+                        
+                    </div> 
                     
-                    <!-- /.panel -->
+                        <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                                    <span class="pull-right text-muted small"><em>11:13 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                                    <span class="pull-right text-muted small"><em>10:57 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                                    <span class="pull-right text-muted small"><em>9:49 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-money fa-fw"></i> Payment Received
-                                    <span class="pull-right text-muted small"><em>Yesterday</em>
-                                    </span>
-                                </a>
-                            </div>
-                            <!-- /.list-group -->
-                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                            <a href="#" class="btn btn-default btn-block">View Details</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-4 -->
-            </div>
-            <!-- /.row -->
+                
         </div>
         <!-- /#page-wrapper -->
 

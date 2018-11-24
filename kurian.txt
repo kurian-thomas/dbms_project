@@ -22,4 +22,4 @@ Admin values to be inserted
                               basically combining ques and test table.
 
 
-##test attended coloum,for group by dept add class dropdown in index                                 
+##test attended coloum check from user mark table,for group by dept add class dropdown in index                                 
