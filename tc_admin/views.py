@@ -22,7 +22,6 @@ def insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags
     test_date_time = datetime.strptime(test_date+" "+test_time, '%Y-%d-%m %H:%M')
     # print(test_date_time)
     # print(test_title, test_des, test_duration, test_date, test_time)
-   
     
     # Inserting questions into QUES Table
 
@@ -30,7 +29,9 @@ def insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags
         p=[]
         print(i)
         p.extend([a[i],b[i],c[i],d[i]])
+
         cur.execute("INSERT INTO QUES(Ques,Ans_option,Ans_correct) VALUES(:q,:o,:val)",{'q':question[i],'o':str(p),'val':val[i]})
+     
         conn.commit()
     
     # Inserting Test
@@ -59,7 +60,7 @@ def insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags
     print((cur.execute("SELECT * FROM TEST_Q")).fetchall())
     cur.execute("SELECT * FROM QUES")
     print(cur.fetchall())
-    """
+
     conn.close()              
 
 @csrf_exempt

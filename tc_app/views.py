@@ -114,7 +114,8 @@ def test(request, test_number = 0):
 		# correct = c.execute("SELECT * FROM QUES WHERE QUES.id = :id",{'id':test_number}).fetchall()
 		# correct = c.execute("SELECT * FROM QUES").fetchall()
 
-		correct = c.execute("SELECT * FROM TEST_Q").fetchall()		
+		correct = c.execute("SELECT * FROM TEST_Q WHERE testid = :test_number", {"test_number": test_number}).fetchall()	
+		print(correct)
 
 		for i in correct:
 			print(i[0], i[3])
@@ -123,7 +124,10 @@ def test(request, test_number = 0):
 
 		for i in request.POST:
 			print(i)
-		# print(a,b,c,d)
+	
+		conn.commit()
+		conn.close()
+
 		return HttpResponseRedirect('/tc/dashboard')
 	else:
 		dict={}
@@ -133,7 +137,9 @@ def test(request, test_number = 0):
 			#retrieve the questions from the table 
 			conn=sqlite3.connect('SQL/Main.db')
 			cur = conn.cursor()
-			questions_object = cur.execute("Select * from QUES")
+
+			#Retriving the test questions
+			questions_object = cur.execute("Select id, Ques, Ans_option  from QUES where id in (SELECT qid from TEST_Q where testid = :test_id)", {"test_id": test_number})
 			questions=[]
 			
 			for i in questions_object:
