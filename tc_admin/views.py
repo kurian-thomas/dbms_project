@@ -20,9 +20,10 @@ def insert_test(test_title, test_des, test_duration, test_date, test_time, quest
     # print(test_title, test_des, test_duration, test_date, test_time)
     conn=sqlite3.connect('SQL/Main.db')
     cur=conn.cursor()
-    """
+
     # Inserting test values to TEST table
     cur.execute("INSERT INTO TEST(Title, Description, Date_Time, Duration) VALUES ('{}', '{}', '{}', '{}')".format(test_title, test_des, test_date_time, test_duration))
+    testid = cur.execute("SELECT testid from TEST WHERE test_title=:test_title", {"test_title": test_title})[-1]
     conn.commit()
     
     # Inserting questions into QUES Table
@@ -31,10 +32,11 @@ def insert_test(test_title, test_des, test_duration, test_date, test_time, quest
         print(i)
         p.extend([a[i],b[i],c[i],d[i]])
         cur.execute("INSERT INTO QUES(Ques, ns_option, Ans_correct) VALUES(:q,:o,:val)",{'q':question[i], 'o':str(p), 'val':val[i]})
+        cur.execute("INSERT INTO TEST_Q(qid, testid) values(:qid, :testid)", {"qid": qid, "testid": testid})
         conn.commit()
     cur.execute("SELECT * FROM QUES")
     print(cur.fetchall())
-    """
+
     conn.close()              
         
 
