@@ -35,8 +35,8 @@ def insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags
         conn.commit()
     
     # Inserting Test
-    cur.execute("INSERT INTO TEST(test_title,test_duration,test_des,test_tags,Date_Time) VALUES(:t1,:t2,:t3,:t4,:t5)",{'t1':test_title[0],'t2':test_duration[0],'t3':test_des[0],'t4':test_tags[0]},'t5':test_date_time)
-    conn.commit()
+    # cur.execute("INSERT INTO TEST(test_title,test_duration,test_des,test_tags,Date_Time) VALUES(:t1,:t2,:t3,:t4,:t5)",{'t1':test_title[0],'t2':test_duration[0],'t3':test_des[0],'t4':test_tags[0]},'t5':test_date_time)
+    # conn.commit()
 
     # Inserting Test_Q
 
@@ -101,7 +101,7 @@ def create_test_form(request):
     d = request.POST.getlist('D')
     # print(a,b,c,d)
     print(test_title,test_des,test_duration,test_tags)
-    val = request.POST.getlist('check')
+    val = request.POST.get('answer')
     # print(val)
     insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags,test_time,test_date) # insert function
 

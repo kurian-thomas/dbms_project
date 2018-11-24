@@ -1,11 +1,14 @@
 
  function get_element_signup(){
  	console.log("in get");
-  var x = document.getElementById("sign_in").elements;
+  	var x = document.getElementById("sign_in").elements;
  	var n=x[0].value;
  	var p=x[1].value;
  	var ad=x[2].value;
- 	var em=x[3].value;
+	var em=x[3].value;
+	var st=x[4].value;
+	var yr=x[5].value;
+	var di=x[6].value;
  	$('.ajaxProgress').show();
  	$.ajax({
  		type:"POST",
@@ -18,6 +21,9 @@
  			admission:ad,
  			email:em,
  			pass:p,
+ 			stream:st,
+ 			year:yr,
+ 			division:di
  		},
  		success: function(json){
  			console.log("sucess");

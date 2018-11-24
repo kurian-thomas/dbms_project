@@ -79,8 +79,13 @@ def get_element(request):
 	admission = request.POST.get("admission","")
 	email = request.POST.get("email","")
 	password = request.POST.get("pass","")
+											#new variables
+	stream= request.POST.get("stream","")
+	year= request.POST.get("year","")
+	division=request.POST.get("division","")
+	print(stream+year+division)
 	insert_sql(admission,name,email,password,'U')
-	print(str(email)+" "+str(name)+" "+str(admission)+" "+str(password))
+	# print(str(email)+" "+str(name)+" "+str(admission)+" "+str(password))
 
 	request.session['user'] = admission
 
