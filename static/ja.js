@@ -22,7 +22,7 @@
  			email:em,
  			pass:p,
  			stream:st,
- 			year:yr,
+ 			sem:yr,
  			division:di
  		},
  		success: function(json){

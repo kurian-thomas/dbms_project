@@ -54,4 +54,6 @@ then add test_title as foreign key to questions table to impliment 1:n correspon
 
 
 add stream sem and division to user table
-			   
+			stream - text
+ 			sem    - int
+			division - text  
