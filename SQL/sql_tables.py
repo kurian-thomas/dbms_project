@@ -40,8 +40,9 @@ c.execute(''' CREATE TABLE ANS
            )''') 
 
 c.execute('''CREATE TABLE TEST
-          (id INTEGER PRIMARY KEY,
+          (id INTEGER PRIMARY KEY AUTOINCREMENT,
            Title text NOT NULL,
+           Description TEXT,
            Date_Time datetime default current_timestamp,
            Duration real NOT NULL)''') 
 

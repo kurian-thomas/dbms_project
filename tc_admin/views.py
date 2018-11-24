@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, HttpResponse
 import sqlite3
 from django.http import HttpResponse,JsonResponse
+from datetime import datetime
 
 # Create your views here.
 def dashboard(request):
@@ -12,11 +13,19 @@ def dashboard(request):
 def login(request):
     return render(request,'tc_admin/login.html')    
 
-def insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags):
+
+def insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags,test_time,test_date):
     print(question)
 
     conn=sqlite3.connect('SQL/Main.db')
     cur=conn.cursor()
+    test_date_time = datetime.strptime(test_date+" "+test_time, '%Y-%d-%m %H:%M')
+    # print(test_date_time)
+    # print(test_title, test_des, test_duration, test_date, test_time)
+   
+    
+    # Inserting questions into QUES Table
+
     for i in range(len(question)):
         p=[]
         print(i)
@@ -25,7 +34,7 @@ def insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags
         conn.commit()
     
     # Inserting Test
-    cur.execute("INSERT INTO TEST(test_title,test_duration,test_des,test_tags) VALUES(:t1,:t2,:t3,:t4)",{'t1':test_title[0],'t2':test_duration[0],'t3':test_des[0],'t4':test_tags[0]})
+    cur.execute("INSERT INTO TEST(test_title,test_duration,test_des,test_tags,Date_Time) VALUES(:t1,:t2,:t3,:t4,:t5)",{'t1':test_title[0],'t2':test_duration[0],'t3':test_des[0],'t4':test_tags[0]},'t5':test_date_time)
     conn.commit()
 
     # Inserting Test_Q
@@ -50,6 +59,7 @@ def insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags
     print((cur.execute("SELECT * FROM TEST_Q")).fetchall())
     cur.execute("SELECT * FROM QUES")
     print(cur.fetchall())
+    """
     conn.close()              
 
 @csrf_exempt
@@ -75,11 +85,15 @@ def createtest(request):
 
 @csrf_exempt
 def create_test_form(request):
+
     question = request.POST.getlist('question')
     test_title = request.POST.get('test_title')
     test_des = request.POST.get('test_des')
     test_duration = request.POST.get('test_duration')
     test_tags = request.POST.get('test_tags')
+    test_date=request.POST.get('test_date')
+    test_time=request.POST.get('test_time')
+
     a = request.POST.getlist('A')
     b = request.POST.getlist('B')
     c = request.POST.getlist('C')
@@ -88,6 +102,7 @@ def create_test_form(request):
     print(test_title,test_des,test_duration,test_tags)
     val = request.POST.getlist('check')
     # print(val)
-    insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags) # insert function
+    insert_test(question,a,b,c,d,val,test_title,test_des,test_duration,test_tags,test_time,test_date) # insert function
+
 
     return HttpResponse("hi")
