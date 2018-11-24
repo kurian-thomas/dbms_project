@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href = "#" data-toggle = "modal" data-target = "#Tasks">
+                        <a href = "#" data-toggle = "modal" data-target = "#Tasks" id="openModal">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -101,8 +101,8 @@
 
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <div class="col col-md-6">
-                                        <div id="piechart">
+
+                                        <div id="piechart" class="text-center"></div>
                                         <script type="text/javascript">
                                             // Load google charts
                                             google.charts.load('current', {'packages':['corechart']});
@@ -124,17 +124,16 @@
                                             // Optional; add a title and set the width and height of the chart
                                             var options = {
                                                 'is3D':true,
-                                                'title':'Nunmber of students Attended Per Test',
+                                                'title':'Number of students who attended the tests so far',
                                                 'width':550,
-                                                'height':400};
+                                                'height':400,
+                                                'forceIFrame':true};
 
                                             // Display the chart inside the <div> element with id="piechart"
                                             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
                                             chart.draw(data, options);
                                             }
                                         </script><!-- /.panel -->
-                                    </div>
-                                    </div>
                             </div>
                             </div>
                             <!-- /.panel -->
@@ -163,11 +162,10 @@
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-8">
+                                        <div class="text-center" style = "height:400px">
                                         <script>
-                                            window.onload = function () {
-
+                                            openModal.onclick = function() {
+                                            Tasks.style.display="block";
                                             var chart = new CanvasJS.Chart("chartContainer", {
                                                 theme: "dark2",
                                                 exportFileName: "Doughnut Chart",
@@ -213,17 +211,11 @@
 
                                             }
                                         </script>
-                                        <div id="chartContainer" style="height: 370px; width: 100%;">
+                                        <div id="chartContainer" style="height: 370px">
 
                                         </div>
 
                                          </div>
-
-                                        <div class="col-lg-8">
-                                            <div id="morris-bar-chart"></div>
-                                        </div>
-
-                                    </div>
 
                                 </div>
 
