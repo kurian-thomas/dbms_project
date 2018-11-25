@@ -1,15 +1,33 @@
-
+-- Admin Tables Begin
+DROP TABLE IF EXISTS ADMIN;
 CREATE TABLE ADMIN
           (id INTEGER PRIMARY KEY AUTO_INCREMENT,
            name varchar(60) NOT NULL,
            password varchar(60) NOT NULL);
-INSERT INTO ADMIN VALUES(1,'admin','password');
+INSERT INTO ADMIN VALUES(1, 'admin', 'password');
 
+DROP TABLE IF EXISTS TEST;
 CREATE TABLE TEST
-          (id INTEGER PRIMARY KEY,
-           Title varchar(60) NOT NULL,
-           Date_Time datetime default current_timestamp,
-           Duration real NOT NULL);
+          (id INTEGER PRIMARY KEY AUTO_INCREMENT,
+           title varchar(60) NOT NULL,
+           description VARCHAR(100),
+           date_time datetime default current_timestamp,
+           duration real NOT NULL);
+INSERT INTO `TEST` VALUES (1,'Data Structures','Data Structures and algorithms basics','2018-11-28 19:00:00',2);
+
+DROP TABLE IF EXISTS QUES;
+CREATE TABLE QUES
+          (id INTEGER PRIMARY KEY AUTO_INCREMENT,
+		   test_id INT,
+           ques varchar(100) NOT NULL,
+           optA VARCHAR(30),
+           optB VARCHAR(30),
+           optC VARCHAR(30),
+           optD VARCHAR(30),
+           correct VARCHAR(2));
+INSERT INTO `QUES` VALUES (1,1,'Process of inserting an element to a stack is called','create','push','pop','insert','B'),(2,1,'Process of deleting an element from a stack is called','delete','remove','destroy','pop','D');
+-- Admin Tables End           
+
 CREATE TABLE USER
           (id varchar(60) PRIMARY KEY,
            email varchar(60) NOT NULL,
@@ -18,16 +36,7 @@ CREATE TABLE USER
            type varchar(60) NOT NULL);
 INSERT INTO USER VALUES('','','','','U');
 INSERT INTO USER VALUES('augu','augustinetharakan12@gmail.com','augu','augu','U');
-CREATE TABLE QUES
-          (id INTEGER PRIMARY KEY AUTO_INCREMENT,
-           Ques varchar(60) NOT NULL,
-           Ans_option varchar(60) NOT NULL,
-           Ans_correct varchar(60) NOT NULL);
-INSERT INTO QUES VALUES(1,'Choose the correct option','[]','2');
-INSERT INTO QUES VALUES(2,'Choose the correct option','[''a'', ''b'', ''c'', ''d'']','2');
-INSERT INTO QUES VALUES(3,'Choose the correct option','[''a'', ''b'', ''c'', ''d'']','2');
-INSERT INTO QUES VALUES(4,'question','[''1'', ''2'', ''3'', ''4'']','3');
-INSERT INTO QUES VALUES(5,'question','[''1'', ''2'', ''3'', ''4'']','2');
+
 CREATE TABLE USER_RESPONSE
           (user_id INTEGER PRIMARY KEY,
            test_id INTEGER NOT NULL,
