@@ -87,30 +87,34 @@ def get_element_log(request):
 
 
 @csrf_exempt
-@login_required
-def test(request, test_id=-1):
+# @login_required
+def test(request, test_id = -1):
 	if request.method == 'POST':
-		print(request.POST)
+
+		c = conn.cursor()
+
 		responses = request.POST
 		user_id = request.session['user']
 
-		# conn = sqlite3.connect('SQL/Main.db')
-		c = conn.cursor()
+		c.execute("SELECT id, correct FROM QUES WHERE QUES.test_id = {}".format(test_id))
+		correct = c.fetchall()
 
-		# correct = c.execute("SELECT * FROM QUES WHERE QUES.id = :id",{'id':test_number}).fetchall()
-		# correct = c.execute("SELECT * FROM QUES").fetchall()
+		score = 0
+		total_questions = 0
 
-		# correct = c.execute("SELECT * FROM TEST_Q WHERE testid = :test_number", {"test_number": test_number}).fetchall()	
-		# print(correct)
+		for i in correct:
+			total_questions += 1
+			try:
+				if(responses[str(i[0])] == i[1]):
+					score += 1
+			except KeyError:
+				print("user has not attempted question "+ str(i[0]))
 
-		# for i in correct:
-		# 	print(i[0], i[3])
+		percentage = (score/total_questions)*100
+		print("Total score", score, "Percentage", percentage)
 
-		mark = 0
+		#sql to store the score 
 
-		for i in request.POST:
-			print(i)
-	
 		conn.commit()
 		conn.close()
 
