@@ -88,10 +88,8 @@ def get_element_log(request):
 
 @csrf_exempt
 @login_required
-def test(request, test_id=0):
-	print(test_id)
+def test(request, test_id=-1):
 	if request.method == 'POST':
-		print(test_number)
 		print(request.POST)
 		responses = request.POST
 		user_id = request.session['user']
@@ -102,8 +100,8 @@ def test(request, test_id=0):
 		# correct = c.execute("SELECT * FROM QUES WHERE QUES.id = :id",{'id':test_number}).fetchall()
 		# correct = c.execute("SELECT * FROM QUES").fetchall()
 
-		correct = c.execute("SELECT * FROM TEST_Q WHERE testid = :test_number", {"test_number": test_number}).fetchall()	
-		print(correct)
+		# correct = c.execute("SELECT * FROM TEST_Q WHERE testid = :test_number", {"test_number": test_number}).fetchall()	
+		# print(correct)
 
 		for i in correct:
 			print(i[0], i[3])
@@ -118,16 +116,19 @@ def test(request, test_id=0):
 
 		return HttpResponseRedirect('/tc/dashboard')
 	else:
-		cur = conn.cursor()
 		dict={}
-		if test_id == 0:
+		if test_id == -1:
 			return HttpResponseRedirect('/tc/dashboard')
 		else:
+			print(test_id)
+			c = conn.cursor()
 			#Retriving the test questions
-			questions_object = cur.execute("SELECT id, ques, optA, optB, optC, optD, correct from QUES where test_id={}".format(test_id))
+			c.execute("SELECT id, ques, optA, optB, optC, optD, correct from QUES where test_id={}".format(test_id))
+			questions_object = c.fetchall()
 			questions=[]			
 			for i in questions_object:
-				print(i)
+				pass
+				# print(i)
 				# options = ast.literal_eval(i[2])
 				# print(options)
 				# questions.append({"q_id":i[0], "question": i[1], "question_options": options})
