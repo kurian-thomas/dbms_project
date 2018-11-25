@@ -88,7 +88,8 @@ def get_element_log(request):
 
 @csrf_exempt
 @login_required
-def test(request, test_id = -1):
+def test(request, test_id=0):
+	print(test_id)
 	if request.method == 'POST':
 		print(test_number)
 		print(request.POST)
@@ -117,24 +118,23 @@ def test(request, test_id = -1):
 
 		return HttpResponseRedirect('/tc/dashboard')
 	else:
-		c = conn.cursor()
+		cur = conn.cursor()
 		dict={}
 		if test_id == 0:
 			return HttpResponseRedirect('/tc/dashboard')
 		else:
 			#Retriving the test questions
-			questions_object = cur.execute("Select id, Ques, Ans_option  from QUES where id in (SELECT qid from TEST_Q where testid = {})".format(test_id))
-			questions=[]
-			
+			questions_object = cur.execute("SELECT id, ques, optA, optB, optC, optD, correct from QUES where test_id={}".format(test_id))
+			questions=[]			
 			for i in questions_object:
 				print(i)
 				# options = ast.literal_eval(i[2])
 				# print(options)
 				# questions.append({"q_id":i[0], "question": i[1], "question_options": options})
 
-			dict['questions'] = questions
-			dict['test_number'] = test_number
-			return render(request,'tc_app/test.html',dict)
+			#dict['questions'] = questions
+			#dict['test_number'] = test_number
+			return render(request,'tc_app/test.html')
 
 @login_required
 def logout(request):
