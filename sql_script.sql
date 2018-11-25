@@ -11,12 +11,13 @@ CREATE TABLE TEST
            Date_Time datetime default current_timestamp,
            Duration real NOT NULL);
 CREATE TABLE USER
-          (id varchar(60) PRIMARY KEY,
-           email varchar(60) NOT NULL,
-           username varchar(60) NOT NULL,
-           password varchar(60) NOT NULL,
-           type varchar(60) NOT NULL);
-INSERT INTO USER VALUES('','','','','U');
+          (id varchar(11) PRIMARY KEY,
+           email varchar(30) NOT NULL,
+           username varchar(30) NOT NULL,
+           password varchar(30) NOT NULL,
+           stream varchar(5),
+           sem varchar(5), 
+           division varchar(5));
 INSERT INTO USER VALUES('augu','augustinetharakan12@gmail.com','augu','augu','U');
 CREATE TABLE QUES
           (id INTEGER PRIMARY KEY AUTO_INCREMENT,
