@@ -103,8 +103,8 @@ def test(request, test_id=-1):
 		# correct = c.execute("SELECT * FROM TEST_Q WHERE testid = :test_number", {"test_number": test_number}).fetchall()	
 		# print(correct)
 
-		for i in correct:
-			print(i[0], i[3])
+		# for i in correct:
+		# 	print(i[0], i[3])
 
 		mark = 0
 
@@ -128,14 +128,14 @@ def test(request, test_id=-1):
 			questions=[]			
 			for i in questions_object:
 				pass
-				# print(i)
-				# options = ast.literal_eval(i[2])
-				# print(options)
-				# questions.append({"q_id":i[0], "question": i[1], "question_options": options})
+				print(i)
+				options = [i[2], i[3], i[4], i[5]]
+				print(options)
+				questions.append({"q_id":i[0], "question": i[1], "question_options": options})
 
-			#dict['questions'] = questions
-			#dict['test_number'] = test_number
-			return render(request,'tc_app/test.html')
+			dict['questions'] = questions
+			dict['test_id'] = test_id
+			return render(request,'tc_app/test.html', dict)
 
 @login_required
 def logout(request):
