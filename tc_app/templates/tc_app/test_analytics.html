@@ -42,6 +42,17 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+        .bg-success{
+            background-color: #28a745;
+        }
+        .bg-danger{
+            background-color: #dc3545;
+        }
+        .text-light{
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <div id="wrapper">
@@ -84,53 +95,37 @@
 
                         {% for question in questions %}
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="panel-heading" style="color: white; {% if question.user_correct == 1 %} background-color: green; {% else %} background-color: red; {% endif %}">
                                 <p>{{ question.question }}</p>
                             </div>
-                            <div class="panel-footer">
-                                    
-                                        <div class="question" id="question_{{ question.q_id }}">
-                                            <div class="panel-body">
-                                                <div class="form-group">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox"  name="{{ question.q_id }}" value="A">{{ question.question_options.0 }}
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox"  name="{{ question.q_id }}" value="B">{{ question.question_options.1 }}
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox"  name="{{ question.q_id }}" value="C">{{ question.question_options.2 }}
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox"  name="{{ question.q_id }}" value="D">{{ question.question_options.3 }}
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    
-                                    <br>
-                                    <!-- <div class="row">
-                                      <div class="col-md-1">
-                                            <input type="submit" id="submit" class="btn btn-success"></input>
-                                      </div>
-                                    </div> -->
-                                    <br>
-                                    <!-- <div class="row">
-                                        <div class="col-md-1">
-                                            <button class="btn btn-primary">Previous</button>
+                            <div class="panel-body">
+                                <div class="question" id="question_{{ question.q_id }}">
+                                 
+                                        <div class="form-group">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio"  name="{{ question.q_id }}" value="A"><span class="{% if question.correct == 'A' %}bg-success text-light{% elif question.user_correct == 0 and question.response == 'A' %}bg-danger text-light{% endif %}">{{ question.question_options.0 }}</span>
+                                            </label>
                                         </div>
-                                        <div class="col-md-1 col-md-offset-10">
-                                            <button class="btn btn-primary">Next</button>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio"  name="{{ question.q_id }}" value="B"><span class="{% if question.correct == 'B' %}bg-success text-light{% elif question.user_correct == 0 and question.response == 'B' %}bg-danger text-light{% endif %}">{{ question.question_options.1 }}</span>
+                                            </label>
                                         </div>
-                                    </div> -->
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio"  name="{{ question.q_id }}" value="C"><span class="{% if question.correct == 'C' %}bg-success text-light{% elif question.user_correct == 0 and question.response == 'C' %}bg-danger text-light{% endif %}">{{ question.question_options.2 }}</span>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio"  name="{{ question.q_id }}" value="D"><span class="{% if question.correct == 'D' %}bg-success text-light{% elif question.user_correct == 0 and question.response == 'D' %}bg-danger text-light{% endif %}">{{ question.question_options.3 }}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                          
+                                </div> 
+                                   
                             </div>
                         </div>
                         {% endfor %}

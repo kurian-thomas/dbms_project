@@ -140,7 +140,7 @@ def test(request, test_id = -1):
 			questions_object = c.fetchall()
 			questions=[]			
 			for i in questions_object:
-				pass
+				# pass
 				print(i)
 				options = [i[2], i[3], i[4], i[5]]
 				print(options)
@@ -182,16 +182,15 @@ def previous_tests(request):
 def test_analytics(request, test_id):
 	c = conn.cursor()
 	#Retriving the test questions
-	c.execute("SELECT id, ques, optA, optB, optC, optD, correct from QUES where test_id={}".format(test_id))
+	c.execute("SELECT Q.id, Q.ques, Q.optA, Q.optB, Q.optC, Q.optD, Q.correct, R.response, if(Q.correct = R.response, 1, 0) as correct from QUES Q, USER_RESPONSE R where Q.id = R.question_id AND Q.test_id={}".format(test_id))
 	questions_object = c.fetchall()
 	questions=[]			
 	for i in questions_object:
-		pass
 		print(i)
 		options = [i[2], i[3], i[4], i[5]]
 		print(options)
-		questions.append({"q_id":i[0], "question": i[1], "question_options": options})
-	dict = {}
+		questions.append({"q_id":i[0], "question": i[1], "question_options": options, 'correct': i[6], 'response': i[7], 'user_correct': i[8]})
+	dict={}
 	dict['questions'] = questions
 	dict['test_id'] = test_id
 	return render(request, 'tc_app/test_analytics.html', dict)
