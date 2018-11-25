@@ -9,8 +9,28 @@
 		        	<h1>Create an account</h1>
 		        	<input name="name" type="text" placeholder="Username" autofocus="autofocus" required="required" class="input pass" id="sname" />
 		        	<input name="password" type="password" placeholder="Password" required="required" class="input pass" id="spass" />
-		        	<input name="admission no" type="name" placeholder="Admission Number" required="required" class="input pass" id="sad" />
+		        	<input name="admission no" type="name" placeholder="Admission Number" required="required" class="input pass" id="sad" />					
 		        	<input name="email" type="email" placeholder="E-Mail Address" class="input pass" required="required" id="semail" />
+		        	<select name="stream">
+					    <option value="cs">CS</option>
+					    <option value="eee">EEE</option>
+					    <option value="ec">EC</option>
+					    <option value="be">BE</option>
+					</select>
+					<select name="sem">
+					    <option value="1">1</option>
+					    <option value="2">2</option>
+					    <option value="3">3</option>
+					    <option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>						
+					</select>
+		        	<select name="division">
+					    <option value="a">A</option>
+					    <option value="b">B</option>
+					</select>
 		        	<a class="btn btn-lg btn-success btn-block" id="sigbutton" onclick="get_element_signup()">Sign me up! </a>
 		        	<div class="text-center">
 		          	Already have an account? <a href="/tc/login" id="login_id">Login</a>

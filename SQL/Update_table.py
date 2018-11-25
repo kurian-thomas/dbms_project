@@ -37,13 +37,6 @@ c.execute('''CREATE TABLE QUES
            Ans_option text NOT NULL,
            Ans_correct text NOT NULL)''')
 
-c.execute("DROP TABLE TEST")
-c.execute('''CREATE TABLE TEST(
-    test_title text PRIMARY KEY,
-    test_des text NOT NULL,
-    test_duration real NOT NULL,
-    test_tags text NOT NULL)''')
-
 c.execute("DROP TABLE USER_RESPONSE")
 c.execute('''CREATE TABLE USER_RESPONSE
           (user_id INTEGER PRIMARY KEY,
@@ -53,22 +46,8 @@ c.execute('''CREATE TABLE USER_RESPONSE
            FOREIGN KEY(test_id) REFERENCES TEST(id),
            FOREIGN KEY(question_id) REFERENCES QUES(id))''') 
 
-c.execute("DROP TABLE TEST")
 
-c.execute('''CREATE TABLE TEST(
-    test_id text PRIMARY KEY,
-    test_title text NOT NULL,
-    test_duration real NOT NULL,
-    Date_Time datetime,
-    test_tags text NOT NULL)''')
-
-
-c.execute('''CREATE TABLE TEST_Q(
-        id INTEGER PRIMARY KEY,
-        qid INTEGER NOT NULL,
-        testid text NOT NULL,
-        FOREIGN KEY(qid) REFERENCES QUES(id),
-        FOREIGN KEY(testid) REFERENCES TEST(test_id)) ''')
+"""
 """
 
 c.execute(''' CREATE TABLE TEST_REPORT(
@@ -78,6 +57,28 @@ c.execute(''' CREATE TABLE TEST_REPORT(
           FOREIGN KEY(user_id) REFERENCES USER(id),
           FOREIGN KEY(test_id) REFERENCES TEST(test_id)) ''')
               
+"""
+#print(c.execute("SELECT test_id FROM TEST ORDER BY test_id DESC LIMIT 1").fetchone())
+c.execute("DROP TABLE TEST")
+
+c.execute('''CREATE TABLE TEST(
+    test_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    test_title text NOT NULL,
+    test_duration text NOT NULL,
+    test_des text,
+    test_tags text NOT NULL,
+    Date_Time datetime default current_timestamp)''')
+
+
+c.execute("DROP TABLE TEST_Q")
+c.execute('''CREATE TABLE TEST_Q(
+        id INTEGER PRIMARY KEY,
+        qid INTEGER NOT NULL,
+        testid INTEGER NOT NULL,
+        FOREIGN KEY(qid) REFERENCES QUES(id),
+        FOREIGN KEY(testid) REFERENCES TEST(test_id)) ''')
+
+
 
 # Run the file and remove the comments from it, thereadter.
 conn.commit()

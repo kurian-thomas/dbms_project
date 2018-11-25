@@ -49,4 +49,11 @@ add these details to a seperate menu with test_title as primary key
     test_duration
     test_tags
 
-then add test_title as foreign key to questions table to impliment 1:n correspondance     
+then add test_title as foreign key to questions table to impliment 1:n correspondance  
+========================================================================================
+
+
+add stream sem and division to user table
+			stream - text
+ 			sem    - int
+			division - text  
