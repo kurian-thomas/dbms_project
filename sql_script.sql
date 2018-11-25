@@ -1,13 +1,15 @@
-CREATE TABLE TEST
-          (id INTEGER PRIMARY KEY,
-           Title varchar(60) NOT NULL,
-           Date_Time datetime default current_timestamp,
-           Duration real NOT NULL);
+
 CREATE TABLE ADMIN
           (id INTEGER PRIMARY KEY AUTO_INCREMENT,
            name varchar(60) NOT NULL,
            password varchar(60) NOT NULL);
 INSERT INTO ADMIN VALUES(1,'admin','password');
+
+CREATE TABLE TEST
+          (id INTEGER PRIMARY KEY,
+           Title varchar(60) NOT NULL,
+           Date_Time datetime default current_timestamp,
+           Duration real NOT NULL);
 CREATE TABLE USER
           (id varchar(60) PRIMARY KEY,
            email varchar(60) NOT NULL,
