@@ -38,14 +38,12 @@ CREATE TABLE USER
            division varchar(5));
 INSERT INTO USER VALUES('augu','augustinetharakan12@gmail.com','augu','augu','U');
 
+DROP TABLE IF EXISTS USER_RESPONSE;
 CREATE TABLE USER_RESPONSE
-          (user_id INTEGER PRIMARY KEY,
+          (user_id varchar(11),
            test_id INTEGER NOT NULL,
-           question_id INTEGER NOT NULL);
-CREATE TABLE TEST_Q(
-        id INTEGER PRIMARY KEY,
-        qid INTEGER NOT NULL,
-        testid varchar(60) NOT NULL);
+           question_id INTEGER NOT NULL, 
+           response VARCHAR(2));
 
 CREATE TABLE TEST_REPORT(
           user_id varchar(60) NOT NULL, 

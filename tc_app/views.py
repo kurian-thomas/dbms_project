@@ -87,7 +87,7 @@ def get_element_log(request):
 
 
 @csrf_exempt
-@login_required
+#@login_required
 def test(request, test_id = -1):
 	# User has submitted test
 	if request.method == 'POST':
@@ -103,20 +103,24 @@ def test(request, test_id = -1):
 
 		for i in correct:
 			total_questions += 1
+			c.execute("INSERT INTO USER_RESPONSE VALUES('{}', '{}', '{}', '{}')".format(user_id, test_id, i[0], responses[str(i[0])]))
+			conn.commit()
 			try:
 				if(responses[str(i[0])] == i[1]):
 					score += 1
 			except KeyError:
 				print("user has not attempted question "+ str(i[0]))
 
-		percentage = (score/total_questions)*100
+
+		percentage = (score/float(total_questions))*100
 		print("Total score", score, "Percentage", percentage)
 
-		#sql to store the score 
+		# sql to store the score 
+		c.execute("INSERT INTO TEST_REPORT VALUES('{}', '{}', '{}')".format(user_id, test_id, str(percentage)))
 		conn.commit()
 		conn.close()
 
-		return HttpResponseRedirect('/tc/dashboard')
+		return render(request, 'tc_app/score.html', {'score': percentage})
 	else:
 		dict={}
 		if test_id == -1:
