@@ -157,6 +157,41 @@ def logout(request):
         return HttpResponseRedirect("/tc/login/")
 
 
+def previous_tests(request):
+	c = conn.cursor()
+	# Fetch all the tests from database
+	tests = []
+	c.execute("SELECT * FROM TEST")
+	for row in c.fetchall():
+		print(row)
+		date = row[3]#datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S")
+		tests.append({
+			'id': row[0],
+			'title': row[1],
+			'description': row[2],
+			'date': date.strftime("%d-%B-%Y"),
+			'time': date.strftime('%I:%M %p'),
+			'duration': row[4]
+			})
+	conn.close()
+	return render(request, 'tc_app/previous_tests.html', {'tests': tests})
+
+def test_analytics(request, test_id):
+	c = conn.cursor()
+	#Retriving the test questions
+	c.execute("SELECT id, ques, optA, optB, optC, optD, correct from QUES where test_id={}".format(test_id))
+	questions_object = c.fetchall()
+	questions=[]			
+	for i in questions_object:
+		pass
+		print(i)
+		options = [i[2], i[3], i[4], i[5]]
+		print(options)
+		questions.append({"q_id":i[0], "question": i[1], "question_options": options})
+	dict = {}
+	dict['questions'] = questions
+	dict['test_id'] = test_id
+	return render(request, 'tc_app/test_analytics.html', dict)
 
 
 # def index(request):

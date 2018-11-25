@@ -42,54 +42,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script type="text/javascript">
-    function startTimer(duration, display) {
-        var timer = duration, minutes, seconds;
-        setInterval(function () {
-            minutes = parseInt(timer / 60, 10)
-            seconds = parseInt(timer % 60, 10);
-
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            display.textContent = minutes + ":" + seconds;
-
-            if (--timer < 0) {
-                console.log(timer);
-                $('#submit').click();
-                timer = duration;
-            }
-        }, 1000);
-    }
-
-    window.onload = function () {
-        var display = document.querySelector('#time');
-        startTimer($('#test_duration').attr('value'), display);
-
-        $('.question').css({'display': 'none'});
-        $('#question_{{ questions.0.q_id }}' ).css({'display': 'block'});
-
-        $('.question_select').removeClass('active');
-        $('#question_select{{ questions.0.q_id }}' ).addClass('active');
-        
-    };
-
-    function questionClicked(question_id){
-
-        $('.question').css({'display': 'none'});
-        $('#question_'+question_id).css({'display': 'block'});
-
-        $('.question_select').removeClass('active');
-        $('#question_select'+question_id).addClass('active');
-
-        console.log('#question'+question_id);
-        console.log('#question_select'+question_id);
-        console.log(question_id);
-    }
-</script>
 </head>
 <body>
-    <div id="test_duration" value="{{ test_duration }}"></div>
     <div id="wrapper">
         <form id="submit_form" action="/tc/test/{{ test_id }}" method="POST">
         <!-- Navigation -->
@@ -104,19 +58,6 @@
                 <a class="navbar-brand" href="index.html">Training Cell MEC</a>
             </div>
             <!-- /.navbar-header -->
-
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <a href="#">
-                        Time Left: <span id="hours">00</span>:<span id="time">00:00</span>
-                    </a>
-                </li>
-                <li>
-                    <input type="submit" id="submit" class="btn btn-success"></input>
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -141,41 +82,46 @@
                         <h1 class="page-header">Test Name</h1>
                                 <!--The Question panel-->
 
+                        {% for question in questions %}
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <p>Choose the correct option</p>
+                                <p>{{ question.question }}</p>
                             </div>
                             <div class="panel-footer">
-                                    {% for question in questions %}
+                                    
                                         <div class="question" id="question_{{ question.q_id }}">
                                             <div class="panel-body">
-                                                {{ question.question }}
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox"  name="{{ question.q_id }}" value="A">{{ question.question_options.0 }}
-                                                    </label>
-                                                </div>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox"  name="{{ question.q_id }}" value="B">{{ question.question_options.1 }}
-                                                    </label>
-                                                </div>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox"  name="{{ question.q_id }}" value="C">{{ question.question_options.2 }}
-                                                    </label>
-                                                </div>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox"  name="{{ question.q_id }}" value="D">{{ question.question_options.3 }}
-                                                    </label>
+                                                <div class="form-group">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox"  name="{{ question.q_id }}" value="A">{{ question.question_options.0 }}
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox"  name="{{ question.q_id }}" value="B">{{ question.question_options.1 }}
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox"  name="{{ question.q_id }}" value="C">{{ question.question_options.2 }}
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox"  name="{{ question.q_id }}" value="D">{{ question.question_options.3 }}
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div> 
-                                    {% endfor %}
+                                    
                                     <br>
+                                    <!-- <div class="row">
+                                      <div class="col-md-1">
+                                            <input type="submit" id="submit" class="btn btn-success"></input>
+                                      </div>
+                                    </div> -->
                                     <br>
                                     <!-- <div class="row">
                                         <div class="col-md-1">
@@ -187,6 +133,7 @@
                                     </div> -->
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                         </div>
                         <!-- /.col-lg-12 -->
