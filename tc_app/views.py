@@ -103,7 +103,10 @@ def test(request, test_id = -1):
 
 		for i in correct:
 			total_questions += 1
-			c.execute("INSERT INTO USER_RESPONSE VALUES('{}', '{}', '{}', '{}')".format(user_id, test_id, i[0], responses[str(i[0])]))
+			try:
+				c.execute("INSERT INTO USER_RESPONSE VALUES('{}', '{}', '{}', '{}')".format(user_id, test_id, i[0], responses[str(i[0])]))
+			except KeyError:
+				pass
 			conn.commit()
 			try:
 				if(responses[str(i[0])] == i[1]):
