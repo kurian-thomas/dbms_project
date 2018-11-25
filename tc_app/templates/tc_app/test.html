@@ -63,8 +63,8 @@
     }
 
     window.onload = function () {
-        var fiveMinutes = 6000 , display = document.querySelector('#time');
-        startTimer(fiveMinutes, display);
+        var display = document.querySelector('#time');
+        startTimer($('#test_duration').attr('value'), display);
 
         $('.question').css({'display': 'none'});
         $('#question_{{ questions.0.q_id }}' ).css({'display': 'block'});
@@ -89,6 +89,7 @@
 </script>
 </head>
 <body>
+    <div id="test_duration" value="{{ test_duration }}"></div>
     <div id="wrapper">
         <form id="submit_form" action="/tc/test/{{ test_id }}" method="POST">
         <!-- Navigation -->

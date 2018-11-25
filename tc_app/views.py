@@ -87,12 +87,11 @@ def get_element_log(request):
 
 
 @csrf_exempt
-# @login_required
+@login_required
 def test(request, test_id = -1):
+	# User has submitted test
 	if request.method == 'POST':
-
 		c = conn.cursor()
-
 		responses = request.POST
 		user_id = request.session['user']
 
@@ -114,7 +113,6 @@ def test(request, test_id = -1):
 		print("Total score", score, "Percentage", percentage)
 
 		#sql to store the score 
-
 		conn.commit()
 		conn.close()
 
@@ -123,9 +121,13 @@ def test(request, test_id = -1):
 		dict={}
 		if test_id == -1:
 			return HttpResponseRedirect('/tc/dashboard')
+		# User is taking the test
 		else:
 			print(test_id)
 			c = conn.cursor()
+			# Get the test duration
+			c.execute("SELECT duration FROM TEST WHERE id={}".format(test_id))
+			test_duration = int(float(c.fetchone()[0])*60)
 			#Retriving the test questions
 			c.execute("SELECT id, ques, optA, optB, optC, optD, correct from QUES where test_id={}".format(test_id))
 			questions_object = c.fetchall()
@@ -139,6 +141,7 @@ def test(request, test_id = -1):
 
 			dict['questions'] = questions
 			dict['test_id'] = test_id
+			dict['test_duration'] = test_duration
 			return render(request,'tc_app/test.html', dict)
 
 @login_required
