@@ -85,16 +85,17 @@ def get_element_log(request):
 
 	return JsonResponse({"l":l})
 
+
 @csrf_exempt
 @login_required
-def test(request, test_id = 0):
+def test(request, test_id = -1):
 	if request.method == 'POST':
 		print(test_number)
 		print(request.POST)
 		responses = request.POST
 		user_id = request.session['user']
 
-		conn = sqlite3.connect('SQL/Main.db')
+		# conn = sqlite3.connect('SQL/Main.db')
 		c = conn.cursor()
 
 		# correct = c.execute("SELECT * FROM QUES WHERE QUES.id = :id",{'id':test_number}).fetchall()
@@ -118,7 +119,7 @@ def test(request, test_id = 0):
 	else:
 		c = conn.cursor()
 		dict={}
-		if test_number == 0:
+		if test_id == 0:
 			return HttpResponseRedirect('/tc/dashboard')
 		else:
 			#Retriving the test questions
