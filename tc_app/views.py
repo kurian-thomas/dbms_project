@@ -26,20 +26,22 @@ def dashboard(request):
 	except:
 		user_admission = ''
 	c.execute("SELECT username FROM USER WHERE USER.id = '{}'".format(user_admission))
-	user_name = c.fetchall()[0][0]
+	user_name = c.fetchone()[0]
 	print(user_name)
 	# Fetch all the tests from database
 	tests = []
-	# for row in c.execute("SELECT * FROM TEST"):
-	# 	date = datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S")
-	# 	tests.append({
-	# 		'id': row[0],
-	# 		'title': row[1],
-	# 		'description': row[2],
-	# 		'date': date.strftime("%d-%B-%Y"),
-	# 		'time': date.strftime('%I:%M %p'),
-	# 		'duration': row[4]
-	# 		})
+	c.execute("SELECT * FROM TEST")
+	for row in c.fetchall():
+		print(row)
+		date = row[3]#datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S")
+		tests.append({
+			'id': row[0],
+			'title': row[1],
+			'description': row[2],
+			'date': date.strftime("%d-%B-%Y"),
+			'time': date.strftime('%I:%M %p'),
+			'duration': row[4]
+			})
 	conn.close()
 	return render(request,'tc_app/dashboard.html',{'user_name': user_name, 'tests': tests})
 
@@ -85,7 +87,7 @@ def get_element_log(request):
 
 @csrf_exempt
 @login_required
-def test(request, test_number = 0):
+def test(request, test_id = 0):
 	if request.method == 'POST':
 		print(test_number)
 		print(request.POST)
@@ -114,22 +116,20 @@ def test(request, test_number = 0):
 
 		return HttpResponseRedirect('/tc/dashboard')
 	else:
+		c = conn.cursor()
 		dict={}
 		if test_number == 0:
-			return render(request, 'tc_app/dashboard.html')
+			return HttpResponseRedirect('/tc/dashboard')
 		else:
-			#retrieve the questions from the table 
-			conn=sqlite3.connect('SQL/Main.db')
-			cur = conn.cursor()
-
 			#Retriving the test questions
-			questions_object = cur.execute("Select id, Ques, Ans_option  from QUES where id in (SELECT qid from TEST_Q where testid = :test_id)", {"test_id": test_number})
+			questions_object = cur.execute("Select id, Ques, Ans_option  from QUES where id in (SELECT qid from TEST_Q where testid = {})".format(test_id))
 			questions=[]
 			
 			for i in questions_object:
-				options = ast.literal_eval(i[2])
-				print(options)
-				questions.append({"q_id":i[0], "question": i[1], "question_options": options})
+				print(i)
+				# options = ast.literal_eval(i[2])
+				# print(options)
+				# questions.append({"q_id":i[0], "question": i[1], "question_options": options})
 
 			dict['questions'] = questions
 			dict['test_number'] = test_number
