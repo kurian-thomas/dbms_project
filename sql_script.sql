@@ -29,12 +29,13 @@ INSERT INTO `QUES` VALUES (1,1,'Process of inserting an element to a stack is ca
 -- Admin Tables End           
 
 CREATE TABLE USER
-          (id varchar(60) PRIMARY KEY,
-           email varchar(60) NOT NULL,
-           username varchar(60) NOT NULL,
-           password varchar(60) NOT NULL,
-           type varchar(60) NOT NULL);
-INSERT INTO USER VALUES('','','','','U');
+          (id varchar(11) PRIMARY KEY,
+           email varchar(30) NOT NULL,
+           username varchar(30) NOT NULL,
+           password varchar(30) NOT NULL,
+           stream varchar(5),
+           sem varchar(5), 
+           division varchar(5));
 INSERT INTO USER VALUES('augu','augustinetharakan12@gmail.com','augu','augu','U');
 
 CREATE TABLE USER_RESPONSE
