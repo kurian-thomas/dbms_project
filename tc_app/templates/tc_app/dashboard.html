@@ -46,12 +46,13 @@
                         <div class="row">
                             {% for test in tests %}
                             <div class="col col-lg-6">
-                                <a href="/tc/test/{{ test.id }}">
+                                {% if test.id not in attempted_tests %}<a  href="/tc/test/{{ test.id }}">{% endif %}
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
                                             {{ test.title }}
                                         </div>
                                         <div class="panel-body">
+                                            {% if test.id in attempted_tests %}You have already attempted this test, view analytics <a href="/tc/test_analytics/{{ test.id }}">here</a><br><br>{% endif %}
                                             <p>{{ test.description }}</p>
                                         </div>
                                         <div class="panel-footer">
@@ -60,7 +61,7 @@
                                             Duration: {{ test.duration }} {% if test.duration > 1 %} hours {% else %} hour {% endif %}
                                         </div>
                                     </div>
-                                </a>
+                                {% if test.id not in attempted_tests %}</a>{% endif %}
                             </div>
                             {% endfor %}
                         </div>
@@ -80,12 +81,11 @@
                             function drawChart() {
                             var data = google.visualization.arrayToDataTable([
                             ['Test', 'Correct answers'],
-                            ['TEST 1', 8],
-                            ['TEST 2', 2],
-                            ['TEST 3', 5],
-                            ['TEST 4', 2],
-                            ['TEST 5', 8],
-                            ['TEST 6', 4]
+                            
+                            {% for test in test_report %}
+                                ['{{ test.0 }}', {{test.1}}],
+                            {% endfor %}
+                            
                             ]);
 
                             var theme='dark2';

@@ -36,7 +36,17 @@ def adlogin(request):
 
 
 def dashboard(request):
-    return render(request, 'tc_admin/dashboard.html')
+    dict = {}
+    cur = conn.cursor()
+
+    cur.execute("SELECT stream, count(*) from USER a, TEST_REPORT b where a.id = b.user_id group by stream")
+    branch_report_object = cur.fetchall()
+    branch_report = []
+    for i in branch_report_object:
+        branch_report.append([i[0], i[1]])
+    print(branch_report)
+    dict['branch_report']=branch_report
+    return render(request, 'tc_admin/dashboard.html', dict)
 
 
 ##  Create test functions begin
