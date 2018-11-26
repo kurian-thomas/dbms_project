@@ -1,0 +1,143 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MEC Training Cell</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static 'metisMenu/metisMenu.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'dist/css/sb-admin-2.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- jQuery -->
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static 'metisMenu/metisMenu.min.js' %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'dist/js/sb-admin-2.js' %}"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .bg-success{
+            background-color: #28a745;
+        }
+        .bg-danger{
+            background-color: #dc3545;
+        }
+        .text-light{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <form id="submit_form" action="/tc/test/{{ test_id }}" method="POST">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Training Cell MEC</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        {% for i in questions %}
+                            <li>
+                                <a href="#" class ="question_select" id="question_select{{ i.q_id }}" onClick="questionClicked( {{ i.q_id }} )">{{ i.q_id }} <span>{{ i.question | slice:":20" }}</span></a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper" style="min-height: 903px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Test Name</h1>
+                                <!--The Question panel-->
+
+                        {% for question in questions %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="color: white; {% if question.user_correct == 1 %} background-color: green; {% else %} background-color: red; {% endif %}">
+                                <p>{{ question.question }}</p>
+                            </div>
+                            <div class="panel-body">
+                                <div class="question" id="question_{{ question.q_id }}">
+                                 
+                                        <div class="form-group">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio"  name="{{ question.q_id }}" value="A"><span class="{% if question.correct == 'A' %}bg-success text-light{% elif question.user_correct == 0 and question.response == 'A' %}bg-danger text-light{% endif %}">{{ question.question_options.0 }}</span>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio"  name="{{ question.q_id }}" value="B"><span class="{% if question.correct == 'B' %}bg-success text-light{% elif question.user_correct == 0 and question.response == 'B' %}bg-danger text-light{% endif %}">{{ question.question_options.1 }}</span>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio"  name="{{ question.q_id }}" value="C"><span class="{% if question.correct == 'C' %}bg-success text-light{% elif question.user_correct == 0 and question.response == 'C' %}bg-danger text-light{% endif %}">{{ question.question_options.2 }}</span>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio"  name="{{ question.q_id }}" value="D"><span class="{% if question.correct == 'D' %}bg-success text-light{% elif question.user_correct == 0 and question.response == 'D' %}bg-danger text-light{% endif %}">{{ question.question_options.3 }}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                          
+                                </div> 
+                                   
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            </form>
+        </div>
+    </body>
+</html>

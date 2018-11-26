@@ -11,7 +11,9 @@ urlpatterns = [
 	url(r'^login/', views.login, name='login'),
 	url(r'^dashboard/', views.dashboard, name='dashboard'),
 	url(r'^get_element/', views.get_element, name='get_element'),
-	url(r'^test/(?P<test_number>[0-9]+)', views.test, name='test'),
+	url(r'^test/(?P<test_id>[0-9]+)$', views.test, name='test'),
+	url(r'^test_analytics/(?P<test_id>[0-9]+)$', views.test_analytics, name='test_analytics'),
 	url(r'^test/', views.test, name='test'),
 	url(r'^logout/', views.logout, name='logout'),
+	url(r'^previous_tests/', views.previous_tests, name='previous_tests'),
 ]
