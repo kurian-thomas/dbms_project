@@ -42,8 +42,21 @@ def dashboard(request):
 			'time': date.strftime('%I:%M %p'),
 			'duration': row[4]
 			})
+
+	#Fetch all the attempted test_id 
+	c.execute("SELECT id, mark, title FROM TEST_REPORT a, TEST b where a.test_id = b.id AND user_id = '{}' ".format(user_admission))
+	attempted_tests_obj = c.fetchall()
+	attempted_tests = []
+	test_report = []
+	
+	for i in attempted_tests_obj:
+		print(i)
+		attempted_tests.append(int(i[0]))
+		test_report.append([i[2], i[1]])
+
+	print(test_report)
 	conn.close()
-	return render(request,'tc_app/dashboard.html',{'user_name': user_name, 'tests': tests})
+	return render(request,'tc_app/dashboard.html',{'user_name': user_name, 'tests': tests, 'attempted_tests': attempted_tests, 'test_report': test_report})
 
 def auth(admission ,password):
     c = conn.cursor()
