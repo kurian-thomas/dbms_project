@@ -113,12 +113,16 @@
                                             function drawChart() {
                                             var data = google.visualization.arrayToDataTable([
                                             ['Test', 'Correct answers'],
-                                            ['TEST 1', 8],
-                                            ['TEST 2', 2],
-                                            ['TEST 3', 5],
-                                            ['TEST 4', 2],
-                                            ['TEST 5', 8],
-                                            ['TEST 6', 4]
+                                            
+                                            {% for test in test_report %}
+                                                ['{{ test.0 }}', {{test.1}}],
+                                            {% endfor %}
+                                            // ['TEST 1', 8],
+                                            // ['TEST 2', 2],
+                                            // ['TEST 3', 5],
+                                            // ['TEST 4', 2],
+                                            // ['TEST 5', 8],
+                                            // ['TEST 6', 4]
                                             ]);
 
                                             // Optional; add a title and set the width and height of the chart
@@ -193,13 +197,17 @@
                                                     //yValueFormatString: "###0.0\"%\"",
                                                     click: explodePie,
                                                     dataPoints: [
-                                                        { y: 450, name: "EC" },
-                                                        { y: 120, name: "CS" },
-                                                        { y: 300, name: "EEE" },
-                                                        { y: 800, name: "BE" }
+                                                        // { y: 450, name: "EC" },
+                                                        // { y: 120, name: "CS" },
+                                                        // { y: 300, name: "EEE" },
+                                                        // { y: 800, name: "BE" }
+
+                                                        {% for branch in branch_report %}
+                                                            { name: '{{ branch.0 }}', y: {{branch.1}} },
+                                                        {% endfor %}
                                                     ]
                                                 }]
-                                            });
+                                            })        
                                             chart.render();
 
                                             function explodePie(e) {
@@ -209,7 +217,7 @@
                                                 }
                                             }
 
-                                            }
+                                        }
                                         </script>
                                         <div id="chartContainer" style="height: 370px">
 
