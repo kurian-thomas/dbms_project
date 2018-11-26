@@ -195,7 +195,7 @@ def previous_tests(request):
 def test_analytics(request, test_id):
 	c = conn.cursor()
 	#Retriving the test questions
-	c.execute("SELECT Q.id, Q.ques, Q.optA, Q.optB, Q.optC, Q.optD, Q.correct, R.response, if(Q.correct = R.response, 1, 0) as correct from QUES Q, USER_RESPONSE R where Q.id = R.question_id AND Q.test_id={}".format(test_id))
+	c.execute("SELECT Q.id, Q.ques, Q.optA, Q.optB, Q.optC, Q.optD, Q.correct, R.response, if(Q.correct = R.response, 1, 0) as correct from QUES Q, USER_RESPONSE R where Q.id = R.question_id AND Q.test_id={} AND R.user_id='{}'".format(test_id, request.session['user']))
 	questions_object = c.fetchall()
 	questions=[]			
 	for i in questions_object:
