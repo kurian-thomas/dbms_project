@@ -193,13 +193,17 @@
                                                     //yValueFormatString: "###0.0\"%\"",
                                                     click: explodePie,
                                                     dataPoints: [
-                                                        { y: 450, name: "EC" },
-                                                        { y: 120, name: "CS" },
-                                                        { y: 300, name: "EEE" },
-                                                        { y: 800, name: "BE" }
+                                                        // { y: 450, name: "EC" },
+                                                        // { y: 120, name: "CS" },
+                                                        // { y: 300, name: "EEE" },
+                                                        // { y: 800, name: "BE" }
+
+                                                        {% for branch in branch_report %}
+                                                            { name: '{{ branch.0 }}', y: {{branch.1}} },
+                                                        {% endfor %}
                                                     ]
                                                 }]
-                                            });
+                                            })        
                                             chart.render();
 
                                             function explodePie(e) {
@@ -209,7 +213,7 @@
                                                 }
                                             }
 
-                                            }
+                                        }
                                         </script>
                                         <div id="chartContainer" style="height: 370px">
 
