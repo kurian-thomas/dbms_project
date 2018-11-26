@@ -55,8 +55,15 @@ def dashboard(request):
 		test_report.append([i[2], i[1]])
 
 	print(test_report)
+	c.execute("SELECT test_id,mark FROM TEST_REPORT where user_id='{}'".format(user_admission));
+	i=c.fetchall()
+	g=[]
+	for row in i:
+		g.append(row)
+	print(g)	
+	print(g[0][1])		
 	conn.close()
-	return render(request,'tc_app/dashboard.html',{'user_name': user_name, 'tests': tests, 'attempted_tests': attempted_tests, 'test_report': test_report})
+	return render(request,'tc_app/dashboard.html',{'user_name': user_name, 'tests': tests, 'attempted_tests': attempted_tests, 'test_report': test_report,'line_graph':g})
 
 def auth(admission ,password):
     c = conn.cursor()
