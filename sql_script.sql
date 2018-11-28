@@ -19,11 +19,11 @@ DROP TABLE IF EXISTS QUES;
 CREATE TABLE QUES
           (id INTEGER PRIMARY KEY AUTO_INCREMENT,
 		   test_id INT,
-           ques varchar(100) NOT NULL,
-           optA VARCHAR(30),
-           optB VARCHAR(30),
-           optC VARCHAR(30),
-           optD VARCHAR(30),
+           ques varchar(200) NOT NULL,
+           optA VARCHAR(50),
+           optB VARCHAR(50),
+           optC VARCHAR(50),
+           optD VARCHAR(50),
            correct VARCHAR(2));
 INSERT INTO `QUES` VALUES (1,1,'Process of inserting an element to a stack is called','create','push','pop','insert','B'),(2,1,'Process of deleting an element from a stack is called','delete','remove','destroy','pop','D');
 -- Admin Tables End           

@@ -46,6 +46,14 @@ def dashboard(request):
         branch_report.append([i[0], i[1]])
     print(branch_report)
     dict['branch_report']=branch_report
+
+    cur.execute("SELECT title, count(*) FROM TEST a, TEST_REPORT b where a.id = b.test_id group by id")
+    test_report_obj = cur.fetchall()
+    test_report = []
+    for i in test_report_obj:
+        test_report.append([i[0], i[1]])
+    print(test_report)
+    dict['test_report'] = test_report
     return render(request, 'tc_admin/dashboard.html', dict)
 
 

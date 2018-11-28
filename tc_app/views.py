@@ -55,8 +55,15 @@ def dashboard(request):
 		test_report.append([i[2], i[1]])
 
 	print(test_report)
+	c.execute("SELECT test_id,mark FROM TEST_REPORT where user_id='{}'".format(user_admission));
+	i=c.fetchall()
+	g=[]
+	for row in i:
+		g.append(row)
+	print(g)	
+	print(g[0][1])		
 	conn.close()
-	return render(request,'tc_app/dashboard.html',{'user_name': user_name, 'tests': tests, 'attempted_tests': attempted_tests, 'test_report': test_report})
+	return render(request,'tc_app/dashboard.html',{'user_name': user_name, 'tests': tests, 'attempted_tests': attempted_tests, 'test_report': test_report,'line_graph':g})
 
 def auth(admission ,password):
     c = conn.cursor()
@@ -195,7 +202,7 @@ def previous_tests(request):
 def test_analytics(request, test_id):
 	c = conn.cursor()
 	#Retriving the test questions
-	c.execute("SELECT Q.id, Q.ques, Q.optA, Q.optB, Q.optC, Q.optD, Q.correct, R.response, if(Q.correct = R.response, 1, 0) as correct from QUES Q, USER_RESPONSE R where Q.id = R.question_id AND Q.test_id={}".format(test_id))
+	c.execute("SELECT Q.id, Q.ques, Q.optA, Q.optB, Q.optC, Q.optD, Q.correct, R.response, if(Q.correct = R.response, 1, 0) as correct from QUES Q, USER_RESPONSE R where Q.id = R.question_id AND Q.test_id={} AND R.user_id='{}'".format(test_id, request.session['user']))
 	questions_object = c.fetchall()
 	questions=[]			
 	for i in questions_object:
